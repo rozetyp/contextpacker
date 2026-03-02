@@ -5,6 +5,9 @@
 Transforms `(question, repo_url)` → relevant source files, packed within your token budget.
 Uses LLM-based file selection instead of embeddings — better precision, no vector index to maintain.
 
+> **Try it now → [contextpacker.com](https://contextpacker.com)** — 100 free requests, no card required.
+> We're actively developing this and would love your feedback. Open an issue, drop a ⭐, or reach out.
+
 ```
 question: "How does routing work?"
 repo:     https://github.com/pallets/flask
@@ -30,8 +33,11 @@ Returns packed Markdown ready for your LLM prompt
 
 The fastest way to get started: **[contextpacker.com](https://contextpacker.com)**
 
-- 100 free requests, no card required
-- Use our [MCP server](https://github.com/rozetyp/contextpacker-mcp) to connect any MCP-compatible AI editor (Cursor, Claude Desktop, Windsurf)
+- 100 free requests, no card required — no credit card, no waitlist
+- Works with any GitHub repo (public or private)
+- Use our [MCP server](https://github.com/rozetyp/contextpacker-mcp) to connect any MCP-compatible AI editor (Cursor, Claude Desktop, Windsurf, VS Code)
+
+We're in active development. If you try it and something doesn't work, please [open an issue](https://github.com/rozetyp/contextpacker/issues) — it genuinely helps.
 
 ---
 
@@ -165,6 +171,17 @@ python -m eval.retrieval.runner --all --no-embeddings
 # Single repo
 python -m eval.retrieval.runner --repo flask --no-embeddings
 ```
+
+---
+
+## Feedback & community
+
+This project is early and actively improving. If you:
+- Hit a bug or unexpected result → [open an issue](https://github.com/rozetyp/contextpacker/issues)
+- Have a feature idea → open an issue with the `enhancement` label
+- Want to share a benchmark result or comparison → we'd love to see it
+
+A ⭐ on GitHub helps more people find the project.
 
 ---
 
