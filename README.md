@@ -70,7 +70,7 @@ uvicorn context_packer.main:app --reload --port 8000
 
 ```bash
 curl localhost:8000/v1/packs \
-  -H "Authorization: Bearer your-token" \
+  -H "X-API-Key: your-token" \
   -H "Content-Type: application/json" \
   -d '{"repo_url": "https://github.com/pallets/flask", "query": "How does routing work?"}'
 ```
@@ -160,11 +160,13 @@ Return the full annotated file tree without file contents.
 
 ## Running benchmarks
 
+Make sure your `.env` is set up first (see [Setup](#setup) above) — tests import the app config which requires `LLM_API_KEY`.
+
 ```bash
 # Unit tests (fast, no API calls)
 pytest tests/ -v
 
-# Retrieval benchmarks (~10 min, requires API key)
+# Retrieval benchmarks (~10 min, requires a hosted API key)
 export CONTEXTPACKER_API_KEY=cp_live_your_key
 python -m eval.retrieval.runner --all --no-embeddings
 

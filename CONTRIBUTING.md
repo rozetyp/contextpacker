@@ -15,6 +15,9 @@ cp .env.example .env   # fill in LLM_API_KEY
 ## Running tests
 
 ```bash
+# Tests require LLM_API_KEY to be set (app config loads at import time)
+cp .env.example .env
+# Edit .env and set LLM_API_KEY to any non-empty value for unit tests
 pytest tests/ -v
 ```
 
