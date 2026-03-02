@@ -1,0 +1,134 @@
+{
+  "repo_url": "https://github.com/gin-gonic/gin",
+  "description": "Gin - Go HTTP web framework",
+  "language": "go",
+  "tier": "popular",
+  "questions": [
+    {
+      "id": "gin_easy_01",
+      "query": "Where is the Engine struct defined?",
+      "ground_truth_files": ["gin.go"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "gin_easy_02",
+      "query": "Where is the Context struct that handles requests?",
+      "ground_truth_files": ["context.go"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "gin_easy_03",
+      "query": "Where is the routing tree implemented?",
+      "ground_truth_files": ["tree.go"],
+      "alternatives": ["routergroup.go"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "gin_medium_01",
+      "query": "How does Gin's radix tree router match URLs?",
+      "ground_truth_files": ["tree.go"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "Radix trie with wildcard and param support"
+    },
+    {
+      "id": "gin_medium_02",
+      "query": "How does Gin's middleware chain work?",
+      "ground_truth_files": ["context.go", "gin.go"],
+      "alternatives": ["routergroup.go"],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "c.Next() and handler chain"
+    },
+    {
+      "id": "gin_medium_03",
+      "query": "How does Gin parse JSON request bodies?",
+      "ground_truth_files": ["context.go", "binding/binding.go", "binding/json.go"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "gin_medium_04",
+      "query": "How does Gin's validator work with struct tags?",
+      "ground_truth_files": ["binding/binding.go", "binding/default_validator.go"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "gin_medium_05",
+      "query": "How does Gin handle CORS?",
+      "ground_truth_files": ["gin.go"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation",
+      "notes": "Uses middleware, not built-in"
+    },
+    {
+      "id": "gin_hard_01",
+      "query": "What happens when a panic occurs in a handler?",
+      "ground_truth_files": ["recovery.go", "context.go"],
+      "alternatives": ["gin.go"],
+      "difficulty": "hard",
+      "category": "crosscutting",
+      "notes": "Recovery middleware catches panics"
+    },
+    {
+      "id": "gin_hard_02",
+      "query": "How does Gin implement request/response logging?",
+      "ground_truth_files": ["logger.go", "context.go"],
+      "alternatives": ["gin.go"],
+      "difficulty": "hard",
+      "category": "crosscutting"
+    },
+    {
+      "id": "gin_hard_03",
+      "query": "Where would I add custom error handling for all routes?",
+      "ground_truth_files": ["gin.go", "context.go"],
+      "alternatives": ["routergroup.go"],
+      "difficulty": "hard",
+      "category": "vague"
+    },
+    {
+      "id": "gin_hard_04",
+      "query": "How does Gin handle concurrent requests with shared state?",
+      "ground_truth_files": ["context.go", "gin.go"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "architecture",
+      "notes": "Context pooling, keys map"
+    },
+    {
+      "id": "gin_expert_01",
+      "query": "Why might route parameters not be extracted correctly?",
+      "ground_truth_files": ["tree.go", "context.go"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging",
+      "notes": "Route ordering, wildcard conflicts"
+    },
+    {
+      "id": "gin_expert_02",
+      "query": "How does Gin's context pooling affect memory usage?",
+      "ground_truth_files": ["gin.go", "context.go"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture"
+    },
+    {
+      "id": "gin_expert_03",
+      "query": "What determines route matching priority in Gin?",
+      "ground_truth_files": ["tree.go"],
+      "alternatives": ["routergroup.go"],
+      "difficulty": "expert",
+      "category": "implementation"
+    }
+  ]
+}

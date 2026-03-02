@@ -1,0 +1,170 @@
+{
+  "repo_url": "https://github.com/pydantic/pydantic",
+  "description": "Pydantic - Data validation using Python type annotations",
+  "language": "python",
+  "tier": "library",
+  "questions": [
+    {
+      "id": "pydantic_easy_01",
+      "query": "Where is the BaseModel class defined?",
+      "ground_truth_files": ["pydantic/main.py"],
+      "alternatives": ["pydantic/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "pydantic_easy_02",
+      "query": "Where are Field and validator defined?",
+      "ground_truth_files": ["pydantic/fields.py"],
+      "alternatives": ["pydantic/functional_validators.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "pydantic_easy_03",
+      "query": "Where are built-in types like EmailStr defined?",
+      "ground_truth_files": ["pydantic/networks.py"],
+      "alternatives": ["pydantic/types.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "pydantic_medium_01",
+      "query": "How does Pydantic validate data at model creation?",
+      "ground_truth_files": ["pydantic/main.py", "pydantic/_internal/_model_construction.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "pydantic_medium_02",
+      "query": "How does Pydantic generate JSON schemas?",
+      "ground_truth_files": ["pydantic/json_schema.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "pydantic_medium_03",
+      "query": "How does Pydantic serialize models to dict/JSON?",
+      "ground_truth_files": ["pydantic/main.py"],
+      "alternatives": ["pydantic/_internal/_core_utils.py"],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "pydantic_medium_04",
+      "query": "How does Pydantic handle custom validators?",
+      "ground_truth_files": ["pydantic/functional_validators.py", "pydantic/fields.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "pydantic_medium_05",
+      "query": "How does Pydantic use pydantic-core?",
+      "ground_truth_files": ["pydantic/_internal/_core_utils.py", "pydantic/main.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "pydantic_hard_01",
+      "query": "What happens when a validation error occurs?",
+      "ground_truth_files": ["pydantic/main.py", "pydantic/_internal/_core_utils.py"],
+      "alternatives": ["pydantic/error_wrappers.py"],
+      "difficulty": "hard",
+      "category": "crosscutting"
+    },
+    {
+      "id": "pydantic_hard_02",
+      "query": "How does Pydantic handle forward references in type hints?",
+      "ground_truth_files": ["pydantic/_internal/_model_construction.py"],
+      "alternatives": ["pydantic/main.py"],
+      "difficulty": "hard",
+      "category": "implementation"
+    },
+    {
+      "id": "pydantic_hard_03",
+      "query": "Where would I customize the error message format?",
+      "ground_truth_files": ["pydantic/main.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "vague"
+    },
+    {
+      "id": "pydantic_hard_04",
+      "query": "How does Pydantic's model inheritance work?",
+      "ground_truth_files": ["pydantic/main.py", "pydantic/_internal/_model_construction.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "architecture"
+    },
+    {
+      "id": "pydantic_expert_01",
+      "query": "Why might a field not be included in model_dump()?",
+      "ground_truth_files": ["pydantic/main.py", "pydantic/fields.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging"
+    },
+    {
+      "id": "pydantic_expert_02",
+      "query": "How does Pydantic handle recursive models?",
+      "ground_truth_files": ["pydantic/_internal/_model_construction.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "implementation"
+    },
+    {
+      "id": "pydantic_expert_03",
+      "query": "What determines if a validator runs before or after type coercion?",
+      "ground_truth_files": ["pydantic/functional_validators.py", "pydantic/fields.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture"
+    },
+    {
+      "id": "pydantic_const_01",
+      "query": "What is the default extra fields behavior in Pydantic v2?",
+      "ground_truth_files": ["pydantic/_internal/_config.py"],
+      "alternatives": ["pydantic/config.py"],
+      "difficulty": "medium",
+      "category": "constants",
+      "notes": "extra='ignore' by default"
+    },
+    {
+      "id": "pydantic_const_02",
+      "query": "Where is INFINITY_LIKE_VALS defined for number parsing?",
+      "ground_truth_files": ["pydantic/_internal/_validators.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "constants"
+    },
+    {
+      "id": "pydantic_behavior_01",
+      "query": "What happens when you assign a value to a frozen field?",
+      "ground_truth_files": ["pydantic/main.py"],
+      "alternatives": ["pydantic/_internal/_model_construction.py"],
+      "difficulty": "medium",
+      "category": "behavior",
+      "notes": "Raises ValidationError"
+    },
+    {
+      "id": "pydantic_behavior_02",
+      "query": "What happens if model_validate receives an invalid type?",
+      "ground_truth_files": ["pydantic/main.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "behavior"
+    },
+    {
+      "id": "pydantic_refactor_01",
+      "query": "Which files need changes to add a new type like SecretBytes?",
+      "ground_truth_files": ["pydantic/types.py", "pydantic/_internal/_validators.py"],
+      "alternatives": ["pydantic/__init__.py"],
+      "difficulty": "hard",
+      "category": "refactor"
+    }
+  ]
+}

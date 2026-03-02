@@ -1,0 +1,99 @@
+{
+  "repo_url": "https://github.com/rozetyp/llm-trader-tinkoff",
+  "description": "LLM Trading Bot - Autonomous trading with AI portfolio management and Tinkoff API",
+  "language": "python",
+  "tier": "private",
+  "is_private": true,
+  "questions": [
+    {
+      "id": "llmtrader_easy_01",
+      "query": "Where is the configuration defined?",
+      "ground_truth_files": ["app/core/config.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "configuration",
+      "notes": "Central config module"
+    },
+    {
+      "id": "llmtrader_easy_02",
+      "query": "Where are the technical indicators implemented?",
+      "ground_truth_files": ["app/core/indicators.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "implementation",
+      "notes": "RSI, SMA, breakout indicators"
+    },
+    {
+      "id": "llmtrader_medium_01",
+      "query": "How does the AI portfolio manager work?",
+      "ground_truth_files": ["app/llm/portfolio_manager.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "PositionDecision, PortfolioContext dataclasses"
+    },
+    {
+      "id": "llmtrader_medium_02",
+      "query": "How does the trading strategy work?",
+      "ground_truth_files": ["app/core/strategy.py"],
+      "alternatives": ["app/core/indicators.py"],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "compute_indicators, close_only_signal"
+    },
+    {
+      "id": "llmtrader_medium_03",
+      "query": "How does the stock screener work?",
+      "ground_truth_files": ["app/llm/screener.py", "app/core/screener.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation",
+      "notes": "LLM-based and rule-based screeners"
+    },
+    {
+      "id": "llmtrader_hard_01",
+      "query": "How does the risk management work?",
+      "ground_truth_files": ["app/llm/risk_officer.py", "app/core/risk.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "architecture",
+      "notes": "AI risk officer and risk calculations"
+    },
+    {
+      "id": "llmtrader_hard_02",
+      "query": "How does the trading ledger track positions?",
+      "ground_truth_files": ["app/core/ledger.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "data",
+      "notes": "Position and trade tracking"
+    },
+    {
+      "id": "llmtrader_hard_03",
+      "query": "How does the LLM provider abstraction work?",
+      "ground_truth_files": ["app/llm/providers.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "architecture",
+      "notes": "Multiple LLM provider support"
+    },
+    {
+      "id": "llmtrader_expert_01",
+      "query": "How does the autonomous trading cycle work?",
+      "ground_truth_files": ["app/cli/cycle.py", "app/llm/portfolio_manager.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture",
+      "notes": "Main trading loop orchestration"
+    },
+    {
+      "id": "llmtrader_expert_02",
+      "query": "How does rate limiting work for API calls?",
+      "ground_truth_files": ["app/core/rate_limiter.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "implementation",
+      "notes": "Rate limiting for Tinkoff API"
+    }
+  ]
+}

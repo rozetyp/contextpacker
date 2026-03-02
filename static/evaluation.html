@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How We Evaluate Code Retrieval | ContextPacker Benchmarks</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Our methodology for evaluating code retrieval quality. 177 questions, 14 repositories, cross-vendor LLM judging. Honest benchmarks with documented limitations.">
+    <meta name="keywords" content="code retrieval evaluation, RAG benchmarks, LLM evaluation methodology, code search metrics, NDCG, Hit@K, AI evaluation, embeddings comparison">
+    <meta name="author" content="ContextPacker">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://contextpacker.com/evaluation.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://contextpacker.com/evaluation.html">
+    <meta property="og:title" content="How We Evaluate Code Retrieval | ContextPacker Benchmarks">
+    <meta property="og:description" content="Our methodology for evaluating code retrieval quality. Honest benchmarks with documented limitations.">
+    <meta property="og:image" content="https://contextpacker.com/og-image.png">
+    <meta property="og:site_name" content="ContextPacker">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How We Evaluate Code Retrieval | ContextPacker">
+    <meta name="twitter:description" content="177 questions, 14 repos, honest benchmarks. Our evaluation methodology.">
+    
+    <!-- Structured Data - Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "How We Evaluate Code Retrieval Quality",
+        "description": "Methodology for evaluating code context retrieval using industry-standard metrics like NDCG, MRR, and Hit@K.",
+        "author": {
+            "@type": "Organization",
+            "name": "ContextPacker"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "ContextPacker"
+        },
+        "datePublished": "2025-12-01",
+        "dateModified": "2025-12-03",
+        "about": {
+            "@type": "Thing",
+            "name": "Code Retrieval Evaluation"
+        }
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+    <style>
+        html, body { margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .mono { font-family: ui-monospace, monospace; }
+        .prose h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
+        .prose h3 { margin-top: 2rem; margin-bottom: 0.75rem; }
+        .prose p { margin-bottom: 1.25rem; line-height: 1.75; }
+        .prose ul { margin-bottom: 1.25rem; }
+        .prose li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+<!-- Nav -->
+<header>
+<nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur border-b border-gray-100" aria-label="Main navigation">
+    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="/" class="font-semibold text-lg" aria-label="ContextPacker Home">ContextPacker</a>
+        <div class="hidden md:flex gap-8 text-sm text-gray-500">
+            <a href="/how-it-works.html" class="hover:text-gray-900">How It Works</a>
+            <a href="/evaluation.html" class="text-gray-900 font-medium">Evaluation</a>
+            <a href="/docs.html" class="hover:text-gray-900">API Docs</a>
+        </div>
+        <a href="/#cta" class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800">Get Access</a>
+    </div>
+</nav>
+</header>
+
+<main>
+<!-- Hero -->
+<section class="pt-24 pb-12 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-3xl mx-auto px-6">
+        <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-gray-900">Home</a>
+            <span class="mx-2">→</span>
+            <span class="text-gray-900">Evaluation</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            How We Evaluate Code Retrieval
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed">
+            Honest benchmarks with documented limitations. We test on private repositories where LLMs have no prior knowledge, use industry-standard metrics, and report results with confidence intervals.
+        </p>
+    </div>
+</section>
+
+<!-- Results Summary -->
+<section class="py-8 border-b border-gray-100">
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="text-center">
+                <div class="text-3xl font-bold text-blue-600">177</div>
+                <div class="text-sm text-gray-500">Questions tested</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold text-blue-600">14</div>
+                <div class="text-sm text-gray-500">Repositories</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold text-blue-600">0.92</div>
+                <div class="text-sm text-gray-500">NDCG on private repos</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content -->
+<article class="py-12">
+    <div class="max-w-3xl mx-auto px-6 prose">
+        
+        <h2 class="text-2xl font-bold text-gray-900">Why Evaluation Is Hard for Code Retrieval</h2>
+        
+        <p class="text-gray-600">
+            Evaluating code retrieval systems is surprisingly difficult. The obvious approach — test on popular open-source repositories — has a fundamental flaw: <strong>LLMs have already seen these codebases during training</strong>.
+        </p>
+        
+        <p class="text-gray-600">
+            When we first tested on Flask and FastAPI, our "no context" baseline (LLM with no code provided) scored 7/10 on answer quality. The model wasn't using our retrieval — it was reciting memorized knowledge from training data.
+        </p>
+        
+        <p class="text-gray-600">
+            This realization changed our entire evaluation strategy.
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900">Our Approach: Test Where LLMs Have No Prior</h2>
+        
+        <p class="text-gray-600">
+            We now focus our evaluation on repositories where LLMs are unlikely to have prior knowledge:
+        </p>
+        
+        <div class="overflow-x-auto my-6">
+            <table class="w-full text-sm border border-gray-200 rounded-xl">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="text-left py-3 px-4 font-medium text-gray-600">Tier</th>
+                        <th class="text-left py-3 px-4 font-medium text-gray-600">Description</th>
+                        <th class="text-center py-3 px-4 font-medium text-gray-600">Questions</th>
+                        <th class="text-left py-3 px-4 font-medium text-gray-600">Why It Matters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-t">
+                        <td class="py-3 px-4 font-medium text-gray-900">Private</td>
+                        <td class="py-3 px-4 text-gray-600">5 private GitHub repos</td>
+                        <td class="text-center py-3 px-4">47</td>
+                        <td class="py-3 px-4 text-gray-600">Zero LLM prior — gold standard</td>
+                    </tr>
+                    <tr class="border-t">
+                        <td class="py-3 px-4 font-medium text-gray-900">Obscure</td>
+                        <td class="py-3 px-4 text-gray-600">&lt;1K star repos</td>
+                        <td class="text-center py-3 px-4">24</td>
+                        <td class="py-3 px-4 text-gray-600">Minimal training influence</td>
+                    </tr>
+                    <tr class="border-t">
+                        <td class="py-3 px-4 font-medium text-gray-900">Famous</td>
+                        <td class="py-3 px-4 text-gray-600">Flask, FastAPI, etc.</td>
+                        <td class="text-center py-3 px-4">106</td>
+                        <td class="py-3 px-4 text-gray-600">Upper bound (inflated)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p class="text-gray-600">
+            <strong>Private repositories are our gold standard</strong> because we know the LLM hasn't seen them. On these repos, the "no context" baseline drops to 4.9/10 — proof that retrieval is actually providing value.
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900">Two Benchmarks, Two Questions</h2>
+        
+        <p class="text-gray-600">
+            We run two separate benchmarks that answer different questions:
+        </p>
+        
+        <h3 class="text-xl font-semibold text-gray-900">Benchmark 1: Retrieval Quality</h3>
+        
+        <p class="text-gray-600">
+            <em>"Does ContextPacker find the right files?"</em>
+        </p>
+        
+        <p class="text-gray-600">
+            For each question, we have human-labeled ground truth: the files that actually contain the answer. We measure how well the system ranks these files using <a href="https://en.wikipedia.org/wiki/Discounted_cumulative_gain" class="text-blue-600 hover:underline" target="_blank" rel="noopener">industry-standard metrics</a>:
+        </p>
+        
+        <ul class="text-gray-600 list-disc pl-6">
+            <li><strong>NDCG@10</strong> — How good is the ranking quality? (0-1, higher is better)</li>
+            <li><strong>Hit@10</strong> — Did we find any relevant file in the top 10?</li>
+            <li><strong>MRR</strong> — How high is the first relevant file?</li>
+        </ul>
+        
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 my-6">
+            <h4 class="font-semibold text-gray-900 mb-3">Retrieval Results (Private Repos)</h4>
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div>
+                    <div class="text-2xl font-bold text-blue-600">0.92</div>
+                    <div class="text-xs text-gray-500">ContextPacker NDCG</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-gray-400">0.79</div>
+                    <div class="text-xs text-gray-500">Embeddings NDCG</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-green-600">+13%</div>
+                    <div class="text-xs text-gray-500">Improvement</div>
+                </div>
+            </div>
+        </div>
+        
+        <h3 class="text-xl font-semibold text-gray-900">Benchmark 2: End-to-End Answer Quality</h3>
+        
+        <p class="text-gray-600">
+            <em>"Do those files help the LLM answer correctly?"</em>
+        </p>
+        
+        <p class="text-gray-600">
+            Good retrieval doesn't guarantee good answers. So we also measure whether an LLM produces correct answers when given our files. We use <strong>LLM-as-judge</strong> scoring against human-written key facts.
+        </p>
+        
+        <p class="text-gray-600">
+            To reduce bias, we use <strong>cross-vendor judging</strong>: OpenAI models generate answers, Google models judge them. This prevents models from favoring their own output style.
+        </p>
+        
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 my-6">
+            <h4 class="font-semibold text-gray-900 mb-3">E2E Results (22 Questions)</h4>
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div>
+                    <div class="text-2xl font-bold text-blue-600">8.5/10</div>
+                    <div class="text-xs text-gray-500">ContextPacker</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-gray-600">8.6/10</div>
+                    <div class="text-xs text-gray-500">Embeddings</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-gray-400">4.9/10</div>
+                    <div class="text-xs text-gray-500">No Context</div>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-3 text-center">Cross-vendor judging: GPT-4.1-mini → Gemini-2.0-flash</p>
+        </div>
+        
+        <h2 class="text-2xl font-bold text-gray-900">What We Learned Along the Way</h2>
+        
+        <p class="text-gray-600">
+            Building this evaluation taught us several lessons that might help others in the space:
+        </p>
+        
+        <h3 class="text-xl font-semibold text-gray-900">1. Famous Repos Inflate All Scores</h3>
+        
+        <p class="text-gray-600">
+            Testing on Flask or React doesn't tell you much — LLMs already know these codebases. Your retrieval might not be helping at all.
+        </p>
+        
+        <p class="text-gray-600">
+            <strong>Solution:</strong> Test on private repos or obscure projects where the "no context" baseline actually fails.
+        </p>
+        
+        <h3 class="text-xl font-semibold text-gray-900">2. Symbol Extraction Matters</h3>
+        
+        <p class="text-gray-600">
+            Just showing file paths isn't enough. Adding function and class names (via AST parsing) improved our NDCG from 0.85 to 0.92 — a significant jump.
+        </p>
+        
+        <h3 class="text-xl font-semibold text-gray-900">3. Your Judge Prompt Is Probably Broken</h3>
+        
+        <p class="text-gray-600">
+            Vague evaluation criteria like "should explain error handling" reward confident bullshit. We switched to requiring exact symbol names in answers:
+        </p>
+        
+        <div class="bg-gray-900 rounded-xl p-4 my-6 overflow-x-auto">
+            <pre class="text-sm text-gray-300"><code>❌ "Should explain the request lifecycle"
+✓ "Must mention RequestContext and full_dispatch_request()"</code></pre>
+        </div>
+        
+        <h3 class="text-xl font-semibold text-gray-900">4. Cross-Vendor Judging Reduces Bias</h3>
+        
+        <p class="text-gray-600">
+            When GPT-4 judges GPT-4's answers, scores inflate by ~0.5 points. Using different model families (OpenAI for answers, Google for judging) produces more honest scores.
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900">Honest Limitations</h2>
+        
+        <p class="text-gray-600">
+            We believe in transparent evaluation. Here's what you should know:
+        </p>
+        
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 my-6">
+            <h4 class="font-semibold text-amber-900 mb-3">Documented Caveats</h4>
+            <ul class="text-sm text-amber-800 list-disc pl-5 space-y-2">
+                <li><strong>We wrote the questions</strong> — possible unconscious bias toward what we handle well</li>
+                <li><strong>Sample sizes are small</strong> — 47 private repo questions, 22 E2E questions</li>
+                <li><strong>No external validation</strong> — questions not reviewed by independent parties</li>
+                <li><strong>Results are directional</strong> — treat as optimistic upper bounds, not rigorous proof</li>
+            </ul>
+        </div>
+        
+        <p class="text-gray-600">
+            We're sharing this data because it's useful, not because it's perfect. If you're evaluating code retrieval systems, we hope our methodology and lessons learned help you avoid the same traps.
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900">Comparison to Industry Baselines</h2>
+        
+        <p class="text-gray-600">
+            For context, here's how different approaches perform on code search benchmarks (from published research):
+        </p>
+        
+        <div class="overflow-x-auto my-6">
+            <table class="w-full text-sm border border-gray-200 rounded-xl">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="text-left py-3 px-4 font-medium text-gray-600">System</th>
+                        <th class="text-center py-3 px-4 font-medium text-gray-600">NDCG</th>
+                        <th class="text-center py-3 px-4 font-medium text-gray-600">MRR</th>
+                        <th class="text-left py-3 px-4 font-medium text-gray-600">Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-t">
+                        <td class="py-3 px-4 text-gray-600">BM25 (lexical)</td>
+                        <td class="text-center py-3 px-4">0.31</td>
+                        <td class="text-center py-3 px-4">0.40</td>
+                        <td class="py-3 px-4 text-gray-500 text-xs">CodeSearchNet 2019</td>
+                    </tr>
+                    <tr class="border-t">
+                        <td class="py-3 px-4 text-gray-600">CodeBERT</td>
+                        <td class="text-center py-3 px-4">0.69</td>
+                        <td class="text-center py-3 px-4">0.72</td>
+                        <td class="py-3 px-4 text-gray-500 text-xs">Microsoft 2020</td>
+                    </tr>
+                    <tr class="border-t">
+                        <td class="py-3 px-4 text-gray-600">UniXcoder</td>
+                        <td class="text-center py-3 px-4">0.75</td>
+                        <td class="text-center py-3 px-4">0.78</td>
+                        <td class="py-3 px-4 text-gray-500 text-xs">Microsoft 2022</td>
+                    </tr>
+                    <tr class="border-t bg-blue-50/50">
+                        <td class="py-3 px-4 font-medium text-blue-700">ContextPacker</td>
+                        <td class="text-center py-3 px-4 font-medium text-blue-700">0.92</td>
+                        <td class="text-center py-3 px-4 font-medium text-blue-700">0.89</td>
+                        <td class="py-3 px-4 text-gray-500 text-xs">Our private repo benchmark</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p class="text-gray-600 text-sm">
+            <em>Note: These numbers come from different benchmarks and aren't directly comparable. We include them for rough context on what "good" looks like in this space.</em>
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900">The Bottom Line</h2>
+        
+        <p class="text-gray-600">
+            Our evaluation shows two things:
+        </p>
+        
+        <ol class="text-gray-600 list-decimal pl-6">
+            <li><strong>Context clearly helps</strong> — +3.6 points over no context baseline</li>
+            <li><strong>ContextPacker matches embeddings quality</strong> — without the infrastructure</li>
+        </ol>
+        
+        <p class="text-gray-600">
+            The value proposition isn't "better than embeddings" — it's "same quality, dramatically simpler." No vector database, no pre-indexing, no sync to maintain. Just call the API.
+        </p>
+        
+        <div class="flex gap-4 my-8">
+            <a href="/#cta" class="inline-block bg-gray-900 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-gray-800">
+                Try It Free →
+            </a>
+            <a href="/how-it-works.html" class="inline-block border border-gray-300 text-gray-700 px-6 py-3 rounded-lg text-sm font-medium hover:border-gray-400">
+                How It Works
+            </a>
+        </div>
+        
+    </div>
+</article>
+</main>
+
+<!-- Footer -->
+<footer class="py-12 bg-gray-50 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+<div class="flex justify-center gap-8 text-sm text-gray-500 mt-8">
+            <a href="/how-it-works.html" class="hover:text-gray-900">How It Works</a>
+            <a href="/evaluation.html" class="hover:text-gray-900">Evaluation</a>
+            <a href="/docs.html" class="hover:text-gray-900">API Docs</a>
+        </div>
+        <p class="text-xs text-gray-400">© 2025 ContextPacker. Code context API for AI agents.</p>
+    </div>
+</footer>
+
+</body>
+</html>

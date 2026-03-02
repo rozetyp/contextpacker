@@ -1,0 +1,104 @@
+{
+  "repo_url": "https://github.com/Neoteroi/BlackSheep",
+  "description": "BlackSheep - Fast ASGI web framework for Python",
+  "language": "python",
+  "tier": "obscure",
+  "questions": [
+    {
+      "id": "blacksheep_easy_01",
+      "query": "Where is the main Application class defined?",
+      "ground_truth_files": ["blacksheep/server/application.py"],
+      "alternatives": ["blacksheep/baseapp.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "blacksheep_easy_02",
+      "query": "How does routing work?",
+      "ground_truth_files": ["blacksheep/server/routing.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "blacksheep_easy_03",
+      "query": "Where are HTTP responses implemented?",
+      "ground_truth_files": ["blacksheep/server/responses.py"],
+      "alternatives": ["blacksheep/server/res/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "blacksheep_medium_01",
+      "query": "How is CORS handled in BlackSheep?",
+      "ground_truth_files": ["blacksheep/server/cors.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "feature"
+    },
+    {
+      "id": "blacksheep_medium_02",
+      "query": "How does JWT authentication work?",
+      "ground_truth_files": ["blacksheep/server/authentication/jwt.py"],
+      "alternatives": ["blacksheep/server/authentication/__init__.py"],
+      "difficulty": "medium",
+      "category": "feature"
+    },
+    {
+      "id": "blacksheep_medium_03",
+      "query": "Where is session handling implemented?",
+      "ground_truth_files": ["blacksheep/sessions/__init__.py", "blacksheep/sessions/cookies.py"],
+      "alternatives": ["blacksheep/sessions/abc.py"],
+      "difficulty": "medium",
+      "category": "feature"
+    },
+    {
+      "id": "blacksheep_medium_04",
+      "query": "How does the middleware system work?",
+      "ground_truth_files": ["blacksheep/middlewares.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "blacksheep_hard_01",
+      "query": "How does BlackSheep handle OpenAPI documentation generation?",
+      "ground_truth_files": ["blacksheep/server/openapi/__init__.py", "blacksheep/server/openapi/v3.py"],
+      "alternatives": ["blacksheep/server/openapi/common.py"],
+      "difficulty": "hard",
+      "category": "feature"
+    },
+    {
+      "id": "blacksheep_hard_02",
+      "query": "Where is the dependency injection system implemented?",
+      "ground_truth_files": ["blacksheep/server/di.py"],
+      "alternatives": ["blacksheep/settings/di.py"],
+      "difficulty": "hard",
+      "category": "architecture"
+    },
+    {
+      "id": "blacksheep_hard_03",
+      "query": "How does CSRF protection work?",
+      "ground_truth_files": ["blacksheep/server/csrf.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "security"
+    },
+    {
+      "id": "blacksheep_expert_01",
+      "query": "How is the ASGI interface implemented?",
+      "ground_truth_files": ["blacksheep/server/asgi.py"],
+      "alternatives": ["blacksheep/baseapp.py"],
+      "difficulty": "expert",
+      "category": "architecture"
+    },
+    {
+      "id": "blacksheep_expert_02",
+      "query": "Where is request body parsing handled for multipart forms?",
+      "ground_truth_files": ["blacksheep/multipart.py"],
+      "alternatives": ["blacksheep/contents.py"],
+      "difficulty": "expert",
+      "category": "implementation"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "repo_url": "https://github.com/expressjs/express",
+  "description": "Express - Fast, unopinionated, minimalist web framework for Node.js",
+  "language": "javascript",
+  "tier": "popular",
+  "questions": [
+    {
+      "id": "express_easy_01",
+      "query": "Where is the main express() function implemented that creates an application instance?",
+      "ground_truth_files": ["lib/express.js"],
+      "alternatives": ["lib/application.js"],
+      "difficulty": "easy",
+      "category": "navigation",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_easy_02",
+      "query": "Which file defines the core application prototype, including methods like get, post, and use?",
+      "ground_truth_files": ["lib/application.js"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "navigation",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_easy_03",
+      "query": "Where is the Response prototype that adds helpers like res.json and res.send?",
+      "ground_truth_files": ["lib/response.js"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "navigation",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_medium_01",
+      "query": "Where is the router implementation that matches incoming requests to route handlers?",
+      "ground_truth_files": ["lib/router/index.js"],
+      "alternatives": ["lib/router/route.js", "lib/router/layer.js"],
+      "difficulty": "medium",
+      "category": "architecture",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_medium_02",
+      "query": "How does Express handle middleware execution order?",
+      "ground_truth_files": ["lib/router/index.js", "lib/application.js"],
+      "alternatives": ["lib/router/layer.js"],
+      "difficulty": "medium",
+      "category": "conceptual",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_medium_03",
+      "query": "How are request parameters parsed in Express?",
+      "ground_truth_files": ["lib/request.js"],
+      "alternatives": ["lib/router/layer.js"],
+      "difficulty": "medium",
+      "category": "conceptual",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_medium_04",
+      "query": "How does Express error handling work?",
+      "ground_truth_files": ["lib/router/index.js", "lib/application.js"],
+      "alternatives": ["lib/router/layer.js"],
+      "difficulty": "medium",
+      "category": "conceptual",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_hard_01",
+      "query": "What happens during the full request lifecycle from incoming request to response?",
+      "ground_truth_files": ["lib/application.js", "lib/router/index.js"],
+      "alternatives": ["lib/response.js", "lib/request.js"],
+      "difficulty": "hard",
+      "category": "crosscutting",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_hard_02",
+      "query": "How does Express handle static file serving?",
+      "ground_truth_files": ["lib/express.js"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "implementation",
+      "notes": "Uses serve-static middleware, exposed via express.static",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_const_01",
+      "query": "Where is the default 404 handler defined?",
+      "ground_truth_files": ["lib/router/index.js"],
+      "alternatives": ["lib/application.js"],
+      "difficulty": "medium",
+      "category": "constants",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_const_02",
+      "query": "Where is the trust proxy setting handled?",
+      "ground_truth_files": ["lib/request.js", "lib/application.js"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "constants",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_behavior_01",
+      "query": "What happens if next() is called with an error argument?",
+      "ground_truth_files": ["lib/router/index.js", "lib/router/layer.js"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "behavior",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_behavior_02",
+      "query": "What happens when res.send() is called multiple times?",
+      "ground_truth_files": ["lib/response.js"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "behavior",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_expert_01",
+      "query": "Why might req.body be undefined even with POST data?",
+      "ground_truth_files": ["lib/request.js", "lib/express.js"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging",
+      "notes": "Body parsing middleware not included by default",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "express_expert_02",
+      "query": "How does Express handle route mounting with app.use?",
+      "ground_truth_files": ["lib/application.js", "lib/router/index.js"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture",
+      "source": "synthetic_v0"
+    }
+  ]
+}

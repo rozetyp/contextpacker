@@ -1,0 +1,199 @@
+{
+  "repo_url": "https://github.com/pallets/flask",
+  "description": "Flask - Python micro web framework",
+  "language": "python",
+  "tier": "popular",
+  "questions": [
+    {
+      "id": "flask_easy_01",
+      "query": "Where is the Flask application class defined?",
+      "ground_truth_files": ["src/flask/app.py"],
+      "alternatives": ["src/flask/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "flask_easy_02",
+      "query": "Where is the configuration class?",
+      "ground_truth_files": ["src/flask/config.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "flask_easy_03",
+      "query": "Where is the CLI defined?",
+      "ground_truth_files": ["src/flask/cli.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "flask_medium_01",
+      "query": "How does Flask's thread-local request context work?",
+      "ground_truth_files": ["src/flask/ctx.py", "src/flask/globals.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "Involves LocalStack and LocalProxy patterns"
+    },
+    {
+      "id": "flask_medium_02",
+      "query": "How does Flask's blueprint registration work with URL prefixes?",
+      "ground_truth_files": ["src/flask/blueprints.py", "src/flask/sansio/blueprints.py"],
+      "alternatives": ["src/flask/app.py"],
+      "difficulty": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "flask_medium_03",
+      "query": "How does Flask serialize objects to JSON responses?",
+      "ground_truth_files": ["src/flask/json/provider.py", "src/flask/json/__init__.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "flask_medium_04",
+      "query": "How does Flask's session signing and cookie security work?",
+      "ground_truth_files": ["src/flask/sessions.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "flask_medium_05",
+      "query": "How does Flask integrate with Jinja2 for template rendering?",
+      "ground_truth_files": ["src/flask/templating.py"],
+      "alternatives": ["src/flask/app.py"],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "flask_hard_01",
+      "query": "What happens during the full request lifecycle from WSGI call to response?",
+      "ground_truth_files": ["src/flask/app.py", "src/flask/ctx.py"],
+      "alternatives": ["src/flask/wrappers.py"],
+      "difficulty": "hard",
+      "category": "crosscutting",
+      "notes": "wsgi_app() -> push context -> dispatch -> handle errors -> pop context"
+    },
+    {
+      "id": "flask_hard_02",
+      "query": "Where would I add code to log every request with timing info?",
+      "ground_truth_files": ["src/flask/app.py"],
+      "alternatives": ["src/flask/sansio/app.py"],
+      "difficulty": "hard",
+      "category": "crosscutting",
+      "notes": "before_request, after_request hooks in app.py"
+    },
+    {
+      "id": "flask_hard_03",
+      "query": "How does Flask propagate exceptions through nested blueprints?",
+      "ground_truth_files": ["src/flask/app.py", "src/flask/blueprints.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "debugging",
+      "notes": "Error handlers registered per blueprint, fallback to app"
+    },
+    {
+      "id": "flask_hard_04",
+      "query": "Where is the code that decides which view function to call for a URL?",
+      "ground_truth_files": ["src/flask/app.py", "src/flask/sansio/scaffold.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "vague",
+      "notes": "URL rule matching, dispatch_request()"
+    },
+    {
+      "id": "flask_expert_01",
+      "query": "Why might request.form be empty when POST data is sent?",
+      "ground_truth_files": ["src/flask/wrappers.py", "src/flask/app.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging",
+      "notes": "Content-Type issues, max_content_length, parsing"
+    },
+    {
+      "id": "flask_expert_02",
+      "query": "What determines if a request is considered 'fresh' vs cached?",
+      "ground_truth_files": ["src/flask/wrappers.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging",
+      "notes": "ETag, Last-Modified, conditional request handling"
+    },
+    {
+      "id": "flask_expert_03",
+      "query": "How does Flask ensure thread safety with the application context?",
+      "ground_truth_files": ["src/flask/ctx.py", "src/flask/globals.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture",
+      "notes": "Thread-local storage, LocalStack implementation"
+    },
+    {
+      "id": "flask_const_01",
+      "query": "Where is the FLASK_ENV environment variable read?",
+      "ground_truth_files": ["src/flask/cli.py"],
+      "alternatives": ["src/flask/app.py"],
+      "difficulty": "medium",
+      "category": "constants",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "flask_const_02",
+      "query": "Where is the default MAX_CONTENT_LENGTH configured?",
+      "ground_truth_files": ["src/flask/app.py"],
+      "alternatives": ["src/flask/config.py"],
+      "difficulty": "medium",
+      "category": "constants",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "flask_const_03",
+      "query": "Where are the default JSON encoder settings defined?",
+      "ground_truth_files": ["src/flask/json/provider.py"],
+      "alternatives": ["src/flask/json/__init__.py"],
+      "difficulty": "medium",
+      "category": "constants",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "flask_behavior_01",
+      "query": "What happens when a 500 error occurs during request processing?",
+      "ground_truth_files": ["src/flask/app.py"],
+      "alternatives": ["src/flask/sansio/app.py"],
+      "difficulty": "medium",
+      "category": "behavior",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "flask_behavior_02",
+      "query": "What happens if you try to access request outside of a request context?",
+      "ground_truth_files": ["src/flask/globals.py", "src/flask/ctx.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "behavior",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "flask_behavior_03",
+      "query": "What happens when a blueprint is registered with the same name twice?",
+      "ground_truth_files": ["src/flask/blueprints.py", "src/flask/sansio/blueprints.py"],
+      "alternatives": ["src/flask/app.py"],
+      "difficulty": "hard",
+      "category": "behavior",
+      "source": "synthetic_v0"
+    },
+    {
+      "id": "flask_refactor_01",
+      "query": "Which files need to change to add a new request lifecycle hook?",
+      "ground_truth_files": ["src/flask/app.py", "src/flask/sansio/app.py"],
+      "alternatives": ["src/flask/sansio/scaffold.py"],
+      "difficulty": "hard",
+      "category": "refactor",
+      "source": "synthetic_v0"
+    }
+  ]
+}

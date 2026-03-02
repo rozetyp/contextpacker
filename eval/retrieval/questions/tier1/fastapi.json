@@ -1,0 +1,176 @@
+{
+  "repo_url": "https://github.com/tiangolo/fastapi",
+  "description": "FastAPI - Modern Python web framework",
+  "language": "python",
+  "tier": "popular",
+  "questions": [
+    {
+      "id": "fastapi_easy_01",
+      "query": "Where is the FastAPI class defined?",
+      "ground_truth_files": ["fastapi/applications.py"],
+      "alternatives": ["fastapi/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "fastapi_easy_02",
+      "query": "Where are the route decorators implemented?",
+      "ground_truth_files": ["fastapi/routing.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "fastapi_easy_03",
+      "query": "Where is HTTPException defined?",
+      "ground_truth_files": ["fastapi/exceptions.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "fastapi_medium_01",
+      "query": "How does FastAPI's dependency injection system resolve dependencies?",
+      "ground_truth_files": ["fastapi/dependencies/utils.py", "fastapi/dependencies/models.py"],
+      "alternatives": ["fastapi/routing.py"],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "Dependant class, solve_dependencies()"
+    },
+    {
+      "id": "fastapi_medium_02",
+      "query": "How does FastAPI validate request bodies using Pydantic?",
+      "ground_truth_files": ["fastapi/routing.py", "fastapi/params.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "fastapi_medium_03",
+      "query": "How does FastAPI generate OpenAPI schemas automatically?",
+      "ground_truth_files": ["fastapi/openapi/utils.py", "fastapi/openapi/models.py"],
+      "alternatives": ["fastapi/routing.py"],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "fastapi_medium_04",
+      "query": "How does FastAPI handle OAuth2 authentication?",
+      "ground_truth_files": ["fastapi/security/oauth2.py", "fastapi/security/base.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "fastapi_medium_05",
+      "query": "How does FastAPI convert Pydantic models to JSON responses?",
+      "ground_truth_files": ["fastapi/routing.py", "fastapi/encoders.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "fastapi_hard_01",
+      "query": "What happens when a Pydantic validation error occurs during request parsing?",
+      "ground_truth_files": ["fastapi/exception_handlers.py", "fastapi/routing.py"],
+      "alternatives": ["fastapi/exceptions.py"],
+      "difficulty": "hard",
+      "category": "crosscutting",
+      "notes": "ValidationError caught, converted to 422 response"
+    },
+    {
+      "id": "fastapi_hard_02",
+      "query": "How does FastAPI's Depends() work with sub-dependencies?",
+      "ground_truth_files": ["fastapi/dependencies/utils.py"],
+      "alternatives": ["fastapi/params.py"],
+      "difficulty": "hard",
+      "category": "architecture",
+      "notes": "Recursive dependency resolution, caching"
+    },
+    {
+      "id": "fastapi_hard_03",
+      "query": "Where would I add a middleware that modifies all responses?",
+      "ground_truth_files": ["fastapi/applications.py", "fastapi/routing.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "crosscutting"
+    },
+    {
+      "id": "fastapi_hard_04",
+      "query": "How does FastAPI handle streaming responses?",
+      "ground_truth_files": ["fastapi/responses.py", "fastapi/routing.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "vague"
+    },
+    {
+      "id": "fastapi_expert_01",
+      "query": "Why might a dependency not be cached between requests?",
+      "ground_truth_files": ["fastapi/dependencies/utils.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging",
+      "notes": "Scope issues, use_cache parameter"
+    },
+    {
+      "id": "fastapi_expert_02",
+      "query": "How does FastAPI decide the order of parameter extraction from a request?",
+      "ground_truth_files": ["fastapi/dependencies/utils.py", "fastapi/params.py"],
+      "alternatives": ["fastapi/routing.py"],
+      "difficulty": "expert",
+      "category": "architecture"
+    },
+    {
+      "id": "fastapi_expert_03",
+      "query": "What determines if a route parameter is path, query, or body?",
+      "ground_truth_files": ["fastapi/dependencies/utils.py", "fastapi/params.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "implementation",
+      "notes": "Default type inference based on type hints and presence in path"
+    },
+    {
+      "id": "fastapi_const_01",
+      "query": "What HTTP status code does FastAPI return for validation errors?",
+      "ground_truth_files": ["fastapi/exception_handlers.py"],
+      "alternatives": ["fastapi/exceptions.py"],
+      "difficulty": "easy",
+      "category": "constants",
+      "notes": "422 Unprocessable Entity"
+    },
+    {
+      "id": "fastapi_const_02",
+      "query": "Where is the default OpenAPI version specified?",
+      "ground_truth_files": ["fastapi/openapi/utils.py"],
+      "alternatives": ["fastapi/applications.py"],
+      "difficulty": "medium",
+      "category": "constants"
+    },
+    {
+      "id": "fastapi_behavior_01",
+      "query": "What happens when you don't provide a required query parameter?",
+      "ground_truth_files": ["fastapi/exception_handlers.py", "fastapi/dependencies/utils.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "behavior",
+      "notes": "Returns 422 with details about missing field"
+    },
+    {
+      "id": "fastapi_behavior_02",
+      "query": "What happens if a background task raises an exception?",
+      "ground_truth_files": ["fastapi/background.py"],
+      "alternatives": ["fastapi/routing.py"],
+      "difficulty": "hard",
+      "category": "behavior",
+      "notes": "Exception logged but response already sent"
+    },
+    {
+      "id": "fastapi_refactor_01",
+      "query": "Which files need changes to add a custom parameter type like Cookie?",
+      "ground_truth_files": ["fastapi/params.py", "fastapi/dependencies/utils.py"],
+      "alternatives": ["fastapi/routing.py"],
+      "difficulty": "hard",
+      "category": "refactor"
+    }
+  ]
+}

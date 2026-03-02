@@ -1,0 +1,27 @@
+# ContextPacker v0.1 Dependencies
+
+# Web framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+
+# Data validation & settings
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Token counting
+tiktoken>=0.5.0
+
+# HTTP client for LLM APIs
+httpx>=0.25.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Database
+asyncpg>=0.29.0
+
+# Payments
+stripe>=7.0.0
+
+# Embeddings (for demo)
+numpy>=1.24.0

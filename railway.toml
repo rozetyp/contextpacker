@@ -1,0 +1,19 @@
+# ContextPacker Railway Configuration
+# https://docs.railway.com/guides/config-as-code
+
+[build]
+# Use Dockerfile (auto-detected, but explicit is better)
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+# Number of instances (start with 1)
+numReplicas = 1
+
+# Health check endpoint
+healthcheckPath = "/health"
+healthcheckTimeout = 10
+
+# Restart policy
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

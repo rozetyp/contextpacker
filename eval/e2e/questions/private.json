@@ -1,0 +1,186 @@
+{
+  "version": "1.0",
+  "description": "E2E questions for private repos - zero LLM memorization, true context value signal",
+  "questions": [
+    {
+      "id": "private_001",
+      "repo_url": "https://github.com/rozetyp/sam-api",
+      "query": "How does the API key email delivery work after Stripe payment?",
+      "key_facts": [
+        "email_service.py uses Resend API for delivery",
+        "send_api_key_email() receives email, api_key, and plan parameters",
+        "get_plan_config() from stripe_config.py determines rate limits",
+        "HTML template includes the API key and curl example"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "private_002",
+      "repo_url": "https://github.com/rozetyp/sam-api",
+      "query": "What middleware is applied to all requests and in what order?",
+      "key_facts": [
+        "add_security_headers adds X-Content-Type-Options, X-Frame-Options, X-XSS-Protection",
+        "block_wordpress_bots returns 403 for wp-admin, xmlrpc.php, phpmyadmin paths",
+        "log_api_usage logs API endpoint usage for analytics",
+        "Middleware is defined with @app.middleware('http') decorator"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "private_003",
+      "repo_url": "https://github.com/rozetyp/sam-api",
+      "query": "How are federal contract opportunities searched and filtered?",
+      "key_facts": [
+        "search_opportunities() in db.py handles the database query",
+        "validate_search_params() in security.py sanitizes inputs",
+        "check_rate_limit() enforces per-plan API limits",
+        "Results can be exported to CSV via StreamingResponse"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "private_004",
+      "repo_url": "https://github.com/rozetyp/Context-Packer",
+      "query": "How does the file selection LLM prompt work?",
+      "key_facts": [
+        "selector.py contains the LLM prompts for file selection",
+        "Files are enriched with AST-extracted symbols from symbols.py",
+        "Priority sorting puts src/ first and tests/ last",
+        "The selector returns file paths with reasons for selection"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "private_005",
+      "repo_url": "https://github.com/rozetyp/Context-Packer",
+      "query": "How does the orchestrator handle token budget constraints?",
+      "key_facts": [
+        "orchestrator.py uses binary search to fit content within max_tokens",
+        "Large files are truncated rather than skipped entirely",
+        "count_tokens() calculates token usage",
+        "Each file includes a reason comment for downstream agents"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "private_006",
+      "repo_url": "https://github.com/rozetyp/Context-Packer",
+      "query": "How does the caching system work for cloned repos?",
+      "key_facts": [
+        "repo_cache.py handles disk-level repo caching",
+        "cache.py provides in-memory caching with 5-minute TTL",
+        "Semaphore controls concurrent clone operations",
+        "Cache key includes repo URL and commit/ref"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "private_007",
+      "repo_url": "https://github.com/rozetyp/memory-steward",
+      "query": "How does the conversation processor maintain rolling state?",
+      "key_facts": [
+        "Processor class in processor.ts orchestrates the pipeline",
+        "Chunker splits conversation into processable chunks",
+        "RollingState accumulates decisions and facts across chunks",
+        "Refinement step compresses memory after all chunks processed"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "private_008",
+      "repo_url": "https://github.com/rozetyp/memory-steward",
+      "query": "What prompts are used for LLM memory extraction?",
+      "key_facts": [
+        "SYSTEM_PROMPT in prompts.ts defines the extraction behavior",
+        "buildPrompt() combines current state with new chunk",
+        "REFINE_PROMPT handles the final compression step",
+        "LLM returns updated_state with decisions and facts"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "private_009",
+      "repo_url": "https://github.com/rozetyp/bidbeacon",
+      "query": "How does the email digest system generate opportunity cards?",
+      "key_facts": [
+        "sendDigestEmail() in lib/email.ts sends via Resend API",
+        "generateHtml() creates HTML cards for each opportunity",
+        "generateMuteLinks() creates one-click mute tokens",
+        "Filter chips show active NAICS, PSC, set-aside filters"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "private_010",
+      "repo_url": "https://github.com/rozetyp/bidbeacon",
+      "query": "How are government opportunities fetched and filtered?",
+      "key_facts": [
+        "fetchOpportunities.ts handles SAM.gov API calls",
+        "searchConstants.ts defines NAICS and PSC code mappings",
+        "Prisma ORM manages user subscriptions and preferences",
+        "Results are filtered by user's saved search criteria"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "private_011",
+      "repo_url": "https://github.com/rozetyp/llm-trader-tinkoff",
+      "query": "How does the trading strategy determine entry signals?",
+      "key_facts": [
+        "close_only_signal() in strategy.py checks SMA crossover",
+        "Requires sma50 > sma200 (golden cross)",
+        "breakout_high() checks 20-day high breakout",
+        "RSI must be between 55 and 75"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "private_012",
+      "repo_url": "https://github.com/rozetyp/llm-trader-tinkoff",
+      "query": "How does the ledger track positions and trades?",
+      "key_facts": [
+        "ledger.py uses SQLite with WAL journal mode",
+        "positions table tracks symbol, qty, avg_price, stop, days_held",
+        "trades table logs side, qty, price, fee, timestamp",
+        "decisions table stores LLM reasoning and gate pass/fail"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "private_013",
+      "repo_url": "https://github.com/rozetyp/llm-trader-tinkoff",
+      "query": "What role does the LLM play in trading decisions?",
+      "key_facts": [
+        "decisions table has llm_weight, llm_source, llm_latency_ms columns",
+        "llm_source can be openai, gemini, fallback, or disabled",
+        "llm_raw stores sanitized JSON response",
+        "gates field tracks pass/fail breakdown of entry conditions"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "private_014",
+      "repo_url": "https://github.com/rozetyp/sam-api",
+      "query": "How does the WordPress bot blocking work?",
+      "key_facts": [
+        "block_wordpress_bots middleware checks request path",
+        "Blocks /wp-admin, /wp-content, /wp-includes prefixes",
+        "Also blocks xmlrpc.php, wlwmanifest.xml, phpmyadmin",
+        "Returns 403 silently without logging to reduce noise"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "private_015",
+      "repo_url": "https://github.com/rozetyp/Context-Packer",
+      "query": "How does symbol extraction work for Python files?",
+      "key_facts": [
+        "symbols.py uses AST parsing for Python files",
+        "Extracts function names, class names, docstrings",
+        "Symbols are used to enrich file metadata for LLM selection",
+        "This is described as the 'hidden moat' differentiator"
+      ],
+      "difficulty": "medium"
+    }
+  ]
+}

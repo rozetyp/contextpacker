@@ -1,0 +1,117 @@
+{
+  "repo_url": "https://github.com/rozetyp/sam-api",
+  "description": "GovCon API - Federal contract opportunities API with SAM.gov and USASpending data",
+  "language": "python",
+  "tier": "private",
+  "is_private": true,
+  "questions": [
+    {
+      "id": "samapi_easy_01",
+      "query": "Where is the main FastAPI application defined?",
+      "ground_truth_files": ["app/main.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry",
+      "notes": "FastAPI app is created in main.py with routes"
+    },
+    {
+      "id": "samapi_easy_02",
+      "query": "Where is the database connection configured?",
+      "ground_truth_files": ["app/db.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "data",
+      "notes": "db.py has get_db_connection and execute_query"
+    },
+    {
+      "id": "samapi_medium_01",
+      "query": "How does the API authentication work?",
+      "ground_truth_files": ["app/api_auth.py", "app/security.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "api_auth.py has get_current_user dependency, security.py has validation"
+    },
+    {
+      "id": "samapi_medium_02",
+      "query": "How does rate limiting work?",
+      "ground_truth_files": ["app/rate_limiter.py", "app/api_auth.py"],
+      "alternatives": ["app/config/stripe_config.py"],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "InMemoryRateLimiter in rate_limiter.py, called from api_auth.py"
+    },
+    {
+      "id": "samapi_medium_03",
+      "query": "How are emails sent to users?",
+      "ground_truth_files": ["app/email_service.py"],
+      "alternatives": ["app/notifications.py"],
+      "difficulty": "medium",
+      "category": "implementation",
+      "notes": "email_service.py uses Resend API for user emails"
+    },
+    {
+      "id": "samapi_medium_04",
+      "query": "How is SAM.gov data normalized?",
+      "ground_truth_files": ["app/normalizer.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "data",
+      "notes": "normalizer.py has extract_comprehensive_award_data and other normalization"
+    },
+    {
+      "id": "samapi_hard_01",
+      "query": "How does the multi-key API key rotation work?",
+      "ground_truth_files": ["app/multi_key_manager.py", "app/ingest_delta_multikey.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "architecture",
+      "notes": "Multi-key management for SAM.gov API rate limit distribution"
+    },
+    {
+      "id": "samapi_hard_02",
+      "query": "How does the crosswalk generator link SAM.gov and USASpending data?",
+      "ground_truth_files": ["app/crosswalk_generator.py"],
+      "alternatives": ["generate_crosswalk.py"],
+      "difficulty": "hard",
+      "category": "data",
+      "notes": "Links pre-award SAM.gov to post-award USASpending records"
+    },
+    {
+      "id": "samapi_hard_03",
+      "query": "How are admin notifications sent for daily reports?",
+      "ground_truth_files": ["app/notifications.py"],
+      "alternatives": ["app/email_service.py"],
+      "difficulty": "hard",
+      "category": "implementation",
+      "notes": "AdminNotifications class with send_daily_report"
+    },
+    {
+      "id": "samapi_expert_01",
+      "query": "How does the daily procurement matcher work?",
+      "ground_truth_files": ["app/daily_procurement_matcher.py", "app/crosswalk_generator.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture",
+      "notes": "Automated matching of procurement opportunities"
+    },
+    {
+      "id": "samapi_expert_02",
+      "query": "How does Stripe subscription handling work?",
+      "ground_truth_files": ["app/config/stripe_config.py", "app/config/stripe_handler.py", "app/main.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "implementation",
+      "notes": "Stripe webhooks and subscription management"
+    },
+    {
+      "id": "samapi_medium_05",
+      "query": "Where is the OpenAPI documentation configured?",
+      "ground_truth_files": ["app/openapi_config.py", "app/openapi_models.py"],
+      "alternatives": ["app/config/api_description.py"],
+      "difficulty": "medium",
+      "category": "configuration",
+      "notes": "Custom OpenAPI schema configuration"
+    }
+  ]
+}

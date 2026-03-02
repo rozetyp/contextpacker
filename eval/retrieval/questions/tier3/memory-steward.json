@@ -1,0 +1,90 @@
+{
+  "repo_url": "https://github.com/rozetyp/memory-steward",
+  "description": "Memory Steward - Give AI coding assistants long-term memory via rolling state processing",
+  "language": "typescript",
+  "tier": "private",
+  "is_private": true,
+  "questions": [
+    {
+      "id": "memstew_easy_01",
+      "query": "Where is the main server entry point?",
+      "ground_truth_files": ["src/server.ts"],
+      "alternatives": ["dist/server.js"],
+      "difficulty": "easy",
+      "category": "entry",
+      "notes": "Express server with API endpoints"
+    },
+    {
+      "id": "memstew_easy_02",
+      "query": "Where are the TypeScript types defined?",
+      "ground_truth_files": ["src/types.ts"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "types",
+      "notes": "RollingState and other types"
+    },
+    {
+      "id": "memstew_medium_01",
+      "query": "How does the chunking logic work?",
+      "ground_truth_files": ["src/chunker.ts"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "Chunker class splits chat by user turns"
+    },
+    {
+      "id": "memstew_medium_02",
+      "query": "How does the rolling state processing work?",
+      "ground_truth_files": ["src/processor.ts", "src/types.ts"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture",
+      "notes": "Processor.processConversation updates state per chunk"
+    },
+    {
+      "id": "memstew_medium_03",
+      "query": "Where are the LLM prompts defined?",
+      "ground_truth_files": ["src/prompts.ts"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation",
+      "notes": "SYSTEM_PROMPT, buildPrompt, REFINE_PROMPT"
+    },
+    {
+      "id": "memstew_medium_04",
+      "query": "How does the LLM client interface work?",
+      "ground_truth_files": ["src/llm.ts"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation",
+      "notes": "LLM client abstraction for Gemini"
+    },
+    {
+      "id": "memstew_hard_01",
+      "query": "How is the output rendered to markdown?",
+      "ground_truth_files": ["src/renderer.ts"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "implementation",
+      "notes": "Converts rolling state to REPO-MEMORY.md format"
+    },
+    {
+      "id": "memstew_hard_02",
+      "query": "How does username detection work for chat parsing?",
+      "ground_truth_files": ["src/chunker.ts"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "implementation",
+      "notes": "detectUsername method in Chunker class"
+    },
+    {
+      "id": "memstew_expert_01",
+      "query": "How does the state delta calculation work during processing?",
+      "ground_truth_files": ["src/processor.ts", "src/types.ts"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture",
+      "notes": "Delta tracking between chunk processing iterations"
+    }
+  ]
+}

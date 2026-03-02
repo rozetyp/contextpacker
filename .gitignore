@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Eval results (large, auto-generated)
+eval/retrieval/results/
+eval/e2e/results/
+eval/shared/.cache/
+
+# Editor
+.DS_Store
+.idea/
+.vscode/
+
+# Repo clones (self-hosted mode)
+/repos/
+*.tgz

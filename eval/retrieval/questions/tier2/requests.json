@@ -1,0 +1,129 @@
+{
+  "repo_url": "https://github.com/psf/requests",
+  "description": "Requests - Python HTTP library",
+  "language": "python",
+  "tier": "library",
+  "questions": [
+    {
+      "id": "requests_easy_01",
+      "query": "Where is requests.get() defined?",
+      "ground_truth_files": ["src/requests/api.py"],
+      "alternatives": ["src/requests/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "requests_easy_02",
+      "query": "Where is the Session class?",
+      "ground_truth_files": ["src/requests/sessions.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "requests_easy_03",
+      "query": "Where is the Response class?",
+      "ground_truth_files": ["src/requests/models.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "requests_medium_01",
+      "query": "How does requests handle connection pooling?",
+      "ground_truth_files": ["src/requests/adapters.py", "src/requests/sessions.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "requests_medium_02",
+      "query": "How does requests handle authentication?",
+      "ground_truth_files": ["src/requests/auth.py"],
+      "alternatives": ["src/requests/models.py"],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "requests_medium_03",
+      "query": "How does requests handle cookies?",
+      "ground_truth_files": ["src/requests/cookies.py", "src/requests/sessions.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "requests_medium_04",
+      "query": "How does requests prepare and send a request?",
+      "ground_truth_files": ["src/requests/models.py", "src/requests/sessions.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "requests_medium_05",
+      "query": "How does requests handle SSL certificates?",
+      "ground_truth_files": ["src/requests/certs.py", "src/requests/adapters.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "requests_hard_01",
+      "query": "What happens from requests.get() to actual HTTP send?",
+      "ground_truth_files": ["src/requests/api.py", "src/requests/sessions.py", "src/requests/adapters.py"],
+      "alternatives": ["src/requests/models.py"],
+      "difficulty": "hard",
+      "category": "crosscutting"
+    },
+    {
+      "id": "requests_hard_02",
+      "query": "How does requests handle redirects?",
+      "ground_truth_files": ["src/requests/sessions.py", "src/requests/models.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "implementation"
+    },
+    {
+      "id": "requests_hard_03",
+      "query": "Where would I add retry logic for failed requests?",
+      "ground_truth_files": ["src/requests/adapters.py"],
+      "alternatives": ["src/requests/sessions.py"],
+      "difficulty": "hard",
+      "category": "vague"
+    },
+    {
+      "id": "requests_hard_04",
+      "query": "How does requests stream large response bodies?",
+      "ground_truth_files": ["src/requests/models.py"],
+      "alternatives": ["src/requests/adapters.py"],
+      "difficulty": "hard",
+      "category": "implementation"
+    },
+    {
+      "id": "requests_expert_01",
+      "query": "Why might a request timeout differently than expected?",
+      "ground_truth_files": ["src/requests/adapters.py", "src/requests/sessions.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging",
+      "notes": "Connect vs read timeout, urllib3 integration"
+    },
+    {
+      "id": "requests_expert_02",
+      "query": "How does requests handle multipart file uploads?",
+      "ground_truth_files": ["src/requests/models.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "implementation"
+    },
+    {
+      "id": "requests_expert_03",
+      "query": "What determines connection reuse in requests?",
+      "ground_truth_files": ["src/requests/adapters.py", "src/requests/sessions.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture"
+    }
+  ]
+}

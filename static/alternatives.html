@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContextPacker vs Pinecone, Chroma, Weaviate | Code Context API Alternatives Comparison</title>
+    
+    <!-- SEO - Aggressive Competitor Targeting -->
+    <meta name="description" content="Compare ContextPacker to Pinecone, Chroma, Weaviate, LangChain embeddings, Cursor API, Sourcegraph, and other code context solutions. No vector database, no indexing, same quality. Alternative to embeddings for code search and RAG.">
+    <meta name="keywords" content="Pinecone alternative, Chroma alternative, Weaviate alternative, vector database alternative, embeddings alternative, code search without vector database, RAG without Pinecone, RAG without Chroma, Cursor API alternative, Copilot API alternative, Sourcegraph alternative, Codeium alternative, Windsurf alternative, LangChain alternative, code context API, repository search API, GitHub context API, code RAG alternative, semantic code search alternative, code embeddings alternative, AI code search API, codebase understanding API">
+    <meta name="author" content="ContextPacker">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://contextpacker.com/alternatives.html">
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://contextpacker.com/alternatives.html">
+    <meta property="og:title" content="Code Context API Alternatives - ContextPacker vs Pinecone, Chroma, Embeddings">
+    <meta property="og:description" content="Compare code context solutions: ContextPacker vs vector databases (Pinecone, Chroma, Weaviate), embeddings, and code search tools. No setup, same quality.">
+    <meta property="og:image" content="https://contextpacker.com/og-image.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="ContextPacker">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@contextpacker">
+    <meta name="twitter:creator" content="@contextpacker">
+    <meta name="twitter:url" content="https://contextpacker.com/alternatives.html">
+    <meta name="twitter:title" content="ContextPacker Alternatives Comparison">
+    <meta name="twitter:description" content="Compare ContextPacker to Pinecone, Chroma, Weaviate, and other code context solutions.">
+    <meta name="twitter:image" content="https://contextpacker.com/og-image.svg">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html, body { margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .comparison-table td { vertical-align: top; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+<!-- Nav -->
+<header>
+<nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur border-b border-gray-100" aria-label="Main navigation">
+    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="/" class="font-semibold text-lg" aria-label="ContextPacker Home">ContextPacker</a>
+        <div class="hidden md:flex gap-8 text-sm text-gray-500">
+            <a href="/how-it-works.html" class="hover:text-gray-900">How It Works</a>
+            <a href="/evaluation.html" class="hover:text-gray-900">Evaluation</a>
+            <a href="/docs.html" class="hover:text-gray-900">API Docs</a>
+        </div>
+        <a href="/#cta" class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800">Get Access</a>
+    </div>
+</nav>
+</header>
+
+<!-- Hero -->
+<main>
+<section class="pt-24 pb-12 bg-white" aria-labelledby="hero-heading">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="pt-16"></div>
+        <h1 id="hero-heading" class="text-4xl md:text-5xl font-bold mb-6 leading-tight max-w-3xl">Alternatives to Vector Databases for Code Context</h1>
+        <p class="text-xl text-gray-500 mb-8 max-w-4xl">Comparing ContextPacker to Pinecone, Chroma, Weaviate, and DIY RAG solutions. No indexing, same quality.</p>
+        <div class="flex flex-wrap gap-6 text-sm text-gray-400">
+            <span>No vector DB required</span>
+            <span>·</span>
+            <span>Always fresh context</span>
+            <span>·</span>
+            <span>NDCG 0.92 quality</span>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Comparison Table -->
+<section class="py-20 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-8 text-center">Quick Comparison</h2>
+        <div class="bg-white rounded-xl border border-gray-200 overflow-x-auto shadow-sm">
+            <table class="w-full text-sm">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="text-left py-4 px-6 font-medium text-gray-700">Solution</th>
+                        <th class="text-center py-4 px-4 font-medium text-gray-700">Setup Time</th>
+                        <th class="text-center py-4 px-4 font-medium text-gray-700">Infrastructure</th>
+                        <th class="text-center py-4 px-4 font-medium text-gray-700">Freshness</th>
+                        <th class="text-center py-4 px-4 font-medium text-gray-700">Quality</th>
+                        <th class="text-center py-4 px-4 font-medium text-gray-700">Best For</th>
+                    </tr>
+                </thead>
+                <tbody class="comparison-table">
+                    <tr class="border-t border-gray-100 bg-blue-50/50">
+                        <td class="py-4 px-6 font-semibold text-blue-700">ContextPacker</td>
+                        <td class="text-center py-4 px-4 text-blue-700">1 API call</td>
+                        <td class="text-center py-4 px-4 text-blue-700">None</td>
+                        <td class="text-center py-4 px-4 text-blue-700">Always fresh</td>
+                        <td class="text-center py-4 px-4 text-blue-700">NDCG 0.92</td>
+                        <td class="text-center py-4 px-4 text-sm text-blue-700">Quick prototypes, multi-repo agents</td>
+                    </tr>
+                    <tr class="border-t border-gray-100">
+                        <td class="py-4 px-6 text-gray-700">Pinecone + Embeddings</td>
+                        <td class="text-center py-4 px-4 text-gray-500">2-4 hours</td>
+                        <td class="text-center py-4 px-4 text-gray-500">Vector DB</td>
+                        <td class="text-center py-4 px-4 text-gray-500">Manual sync</td>
+                        <td class="text-center py-4 px-4 text-gray-900">NDCG 0.79</td>
+                        <td class="text-center py-4 px-4 text-sm text-gray-500">High-frequency queries, single repo</td>
+                    </tr>
+                    <tr class="border-t border-gray-100">
+                        <td class="py-4 px-6 text-gray-700">Chroma + Embeddings</td>
+                        <td class="text-center py-4 px-4 text-gray-500">1-3 hours</td>
+                        <td class="text-center py-4 px-4 text-gray-500">Self-host or cloud</td>
+                        <td class="text-center py-4 px-4 text-gray-500">Manual sync</td>
+                        <td class="text-center py-4 px-4 text-gray-900">NDCG 0.79</td>
+                        <td class="text-center py-4 px-4 text-sm text-gray-500">Open-source preference</td>
+                    </tr>
+                    <tr class="border-t border-gray-100">
+                        <td class="py-4 px-6 text-gray-700">Weaviate + Embeddings</td>
+                        <td class="text-center py-4 px-4 text-gray-500">2-5 hours</td>
+                        <td class="text-center py-4 px-4 text-gray-500">Vector DB</td>
+                        <td class="text-center py-4 px-4 text-gray-500">Manual sync</td>
+                        <td class="text-center py-4 px-4 text-gray-900">NDCG 0.79</td>
+                        <td class="text-center py-4 px-4 text-sm text-gray-500">Enterprise scale</td>
+                    </tr>
+                    <tr class="border-t border-gray-100">
+                        <td class="py-4 px-6 text-gray-700">Sourcegraph</td>
+                        <td class="text-center py-4 px-4 text-gray-500">Days-weeks</td>
+                        <td class="text-center py-4 px-4 text-gray-500">Enterprise deployment</td>
+                        <td class="text-center py-4 px-4 text-gray-500">Real-time</td>
+                        <td class="text-center py-4 px-4 text-gray-500">N/A</td>
+                        <td class="text-center py-4 px-4 text-sm text-gray-500">Enterprise code search</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Detailed Comparisons -->
+<section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">Detailed Comparisons</h2>
+        
+        <!-- vs Pinecone -->
+        <div class="mb-12 border-b border-gray-200 pb-12">
+            <h3 class="text-2xl font-bold mb-4">ContextPacker vs Pinecone</h3>
+            <p class="text-gray-600 mb-4">Pinecone is a managed vector database. To use it for code context, you need to embed files, upload vectors, and query by similarity.</p>
+            
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <div class="font-semibold text-blue-900 mb-3">Choose ContextPacker if:</div>
+                    <ul class="text-sm text-blue-800 space-y-2">
+                        <li>• You need results in <strong>under 5 seconds</strong></li>
+                        <li>• You're working across <strong>multiple repos</strong></li>
+                        <li>• You don't want to manage vector infrastructure</li>
+                        <li>• You need context from <strong>private repos</strong> (branches, PRs)</li>
+                        <li>• You're prototyping or building MVPs</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="font-semibold text-gray-900 mb-3">Choose Pinecone if:</div>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• You have >10K queries/day on a single repo</li>
+                        <li>• You need sub-100ms query latency</li>
+                        <li>• You already use Pinecone for other data</li>
+                        <li>• You have a dedicated ML/infra team</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-6 bg-gray-900 text-white p-4 rounded-lg">
+                <div class="text-xs text-gray-400 mb-2">Pinecone setup (simplified):</div>
+                <pre class="text-sm overflow-x-auto"><code># 1. Embed all files
+embeddings = openai.Embedding.create(input=file_contents)
+
+# 2. Upload to Pinecone
+index.upsert(vectors=embeddings)
+
+# 3. Query
+results = index.query(query_embedding, top_k=10)
+
+# 4. Re-index on every code change</code></pre>
+            </div>
+            
+            <div class="mt-4 bg-blue-900 text-white p-4 rounded-lg">
+                <div class="text-xs text-blue-300 mb-2">ContextPacker (one call):</div>
+                <pre class="text-sm overflow-x-auto"><code>context = httpx.post(
+    "contextpacker.com/v1/packs",
+    json={"repo_url": repo, "query": query}
+).json()["markdown"]</code></pre>
+            </div>
+        </div>
+        
+        <!-- vs Chroma -->
+        <div class="mb-12 border-b border-gray-200 pb-12">
+            <h3 class="text-2xl font-bold mb-4">ContextPacker vs Chroma</h3>
+            <p class="text-gray-600 mb-4">Chroma is an open-source vector database. Chroma Sync (Oct 2025) can auto-index GitHub repos, but still requires embeddings infrastructure.</p>
+            
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <div class="font-semibold text-blue-900 mb-3">Choose ContextPacker if:</div>
+                    <ul class="text-sm text-blue-800 space-y-2">
+                        <li>• You want <strong>zero infrastructure</strong> (no Docker, no hosting)</li>
+                        <li>• You need code-aware ranking (understands src/ vs tests/)</li>
+                        <li>• You want results on <strong>first call</strong> (no pre-indexing)</li>
+                        <li>• You're building a SaaS product (usage-based pricing)</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="font-semibold text-gray-900 mb-3">Choose Chroma if:</div>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• You prefer open-source solutions</li>
+                        <li>• You have infra team to run Chroma server</li>
+                        <li>• You're already using Chroma for other data</li>
+                        <li>• You need full control over embedding models</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-500 mt-4"><strong>Note:</strong> Chroma Sync requires initial indexing (30-120s) and re-indexing on code changes. ContextPacker works instantly on any commit/branch.</p>
+        </div>
+        
+        <!-- vs LangChain + Embeddings -->
+        <div class="mb-12 border-b border-gray-200 pb-12">
+            <h3 class="text-2xl font-bold mb-4">ContextPacker vs LangChain + Embeddings (DIY RAG)</h3>
+            <p class="text-gray-600 mb-4">Many developers build custom RAG with LangChain + OpenAI embeddings + Chroma/Pinecone. This works, but takes time.</p>
+            
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-6">
+                <div class="font-semibold text-amber-900 mb-2">⏱️ Time Comparison</div>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <div class="text-amber-900 font-medium mb-2">DIY RAG setup:</div>
+                        <ul class="text-amber-800 space-y-1">
+                            <li>• Clone repo: 1-5 min</li>
+                            <li>• Parse files: 2-10 min</li>
+                            <li>• Generate embeddings: 5-30 min</li>
+                            <li>• Upload to vector DB: 2-5 min</li>
+                            <li>• Write query logic: 30-60 min</li>
+                            <li><strong class="text-amber-900">Total: 2-4 hours first time</strong></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="text-blue-900 font-medium mb-2">ContextPacker:</div>
+                        <ul class="text-blue-800 space-y-1">
+                            <li>• Copy API key: 10 sec</li>
+                            <li>• Make API call: 2-4 sec</li>
+                            <li><strong class="text-blue-900">Total: 15 seconds</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-gray-600">ContextPacker = pre-built RAG pipeline as an API. Same quality, 500x faster setup.</p>
+        </div>
+        
+        <!-- vs Cursor/Copilot/Windsurf -->
+        <div class="mb-12 border-b border-gray-200 pb-12">
+            <h3 class="text-2xl font-bold mb-4">ContextPacker vs Cursor API / Copilot API</h3>
+            <p class="text-gray-600 mb-4">Cursor, GitHub Copilot, and Windsurf have amazing codebase understanding — but they're <strong>IDE-only</strong>, not APIs.</p>
+            
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <div class="font-semibold text-blue-900 mb-3">Choose ContextPacker if:</div>
+                    <ul class="text-sm text-blue-800 space-y-2">
+                        <li>• You're building an <strong>agent</strong>, not using an IDE</li>
+                        <li>• You need context from repos <strong>you don't have locally</strong></li>
+                        <li>• You want to query <strong>any branch/PR</strong> programmatically</li>
+                        <li>• You're building a product (PR bot, doc generator, etc.)</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="font-semibold text-gray-900 mb-3">Use Cursor/Copilot if:</div>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• You're a developer coding in an IDE</li>
+                        <li>• You only need context from locally opened repos</li>
+                        <li>• You want autocomplete + chat UI</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-500 mt-4"><strong>Key difference:</strong> Cursor/Copilot are IDEs with embedded AI. ContextPacker is an API for building AI tools.</p>
+        </div>
+        
+        <!-- vs Sourcegraph -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold mb-4">ContextPacker vs Sourcegraph</h3>
+            <p class="text-gray-600 mb-4">Sourcegraph is an enterprise code search platform. It indexes your entire org's codebase and provides powerful search.</p>
+            
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <div class="font-semibold text-blue-900 mb-3">Choose ContextPacker if:</div>
+                    <ul class="text-sm text-blue-800 space-y-2">
+                        <li>• You need context for <strong>AI agent prompts</strong></li>
+                        <li>• You want simple API access</li>
+                        <li>• You don't need full-text search UI</li>
+                        <li>• You're a small team (not enterprise)</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="font-semibold text-gray-900 mb-3">Choose Sourcegraph if:</div>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• You need <strong>human-facing code search</strong></li>
+                        <li>• You have 100+ developers</li>
+                        <li>• You want batch code migrations</li>
+                        <li>• You have enterprise compliance needs</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-500 mt-4"><strong>Different use cases:</strong> Sourcegraph = search UI for developers. ContextPacker = context API for AI agents.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Cost Comparison -->
+<section class="py-20 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-4xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-8 text-center">Cost Comparison</h2>
+        
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+            <table class="w-full text-sm">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="text-left py-4 px-6 font-medium">Solution</th>
+                        <th class="text-center py-4 px-4 font-medium">Monthly Cost</th>
+                        <th class="text-center py-4 px-4 font-medium">Setup Cost (time)</th>
+                        <th class="text-center py-4 px-4 font-medium">Total First Month</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-t border-gray-100 bg-blue-50/50">
+                        <td class="py-4 px-6 font-semibold text-blue-700">ContextPacker</td>
+                        <td class="text-center py-4 px-4 text-blue-700">$9</td>
+                        <td class="text-center py-4 px-4 text-blue-700">$0 (15 sec)</td>
+                        <td class="text-center py-4 px-4 font-semibold text-blue-700">$9</td>
+                    </tr>
+                    <tr class="border-t border-gray-100">
+                        <td class="py-4 px-6 text-gray-700">Pinecone + OpenAI Embeddings</td>
+                        <td class="text-center py-4 px-4 text-gray-900">~$12</td>
+                        <td class="text-center py-4 px-4 text-gray-500">$200-400 (eng time)</td>
+                        <td class="text-center py-4 px-4 text-gray-900">$212-412</td>
+                    </tr>
+                    <tr class="border-t border-gray-100">
+                        <td class="py-4 px-6 text-gray-700">Chroma (self-hosted) + Embeddings</td>
+                        <td class="text-center py-4 px-4 text-gray-900">~$15</td>
+                        <td class="text-center py-4 px-4 text-gray-500">$200-400 (eng time)</td>
+                        <td class="text-center py-4 px-4 text-gray-900">$215-415</td>
+                    </tr>
+                    <tr class="border-t border-gray-100">
+                        <td class="py-4 px-6 text-gray-700">Sourcegraph Enterprise</td>
+                        <td class="text-center py-4 px-4 text-gray-900">Contact sales</td>
+                        <td class="text-center py-4 px-4 text-gray-500">$2000+ (deployment)</td>
+                        <td class="text-center py-4 px-4 text-gray-900">$$$$$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p class="text-xs text-gray-500 mt-6 text-center">Engineering time valued at $100/hour. Setup includes cloning, parsing, embedding, database setup, and query logic.</p>
+    </div>
+</section>
+
+<!-- When to Use What -->
+<section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-10 text-center">Decision Framework</h2>
+        
+        <div class="space-y-4">
+            <div class="border-l-4 border-blue-500 bg-blue-50 p-4 rounded-r-lg">
+                <div class="font-semibold text-blue-900 mb-2">Use ContextPacker if you're:</div>
+                <ul class="text-sm text-blue-800 space-y-1">
+                    <li>• Building an AI agent that needs codebase context</li>
+                    <li>• Prototyping a coding assistant or documentation generator</li>
+                    <li>• Working across multiple repos or need PR/branch-level context</li>
+                    <li>• Solo founder or small team without dedicated infrastructure</li>
+                    <li>• Doing <1000 queries/day (beyond that, embeddings cheaper per query)</li>
+                </ul>
+            </div>
+            
+            <div class="border-l-4 border-gray-300 bg-gray-50 p-4 rounded-r-lg">
+                <div class="font-semibold text-gray-900 mb-2">Use Vector DB (Pinecone/Chroma/Weaviate) if you're:</div>
+                <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Running 10K+ queries/day on a single, stable repo</li>
+                    <li>• Need sub-100ms query latency</li>
+                    <li>• Have ML/infra team to maintain embedding pipeline</li>
+                    <li>• Already using vector DBs for other data</li>
+                </ul>
+            </div>
+            
+            <div class="border-l-4 border-gray-300 bg-gray-50 p-4 rounded-r-lg">
+                <div class="font-semibold text-gray-900 mb-2">Use IDE Tools (Cursor/Copilot/Windsurf) if you're:</div>
+                <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• A developer coding locally (not building a product)</li>
+                    <li>• Need autocomplete + chat UI in your editor</li>
+                    <li>• Only working with repos you have checked out</li>
+                </ul>
+            </div>
+            
+            <div class="border-l-4 border-gray-300 bg-gray-50 p-4 rounded-r-lg">
+                <div class="font-semibold text-gray-900 mb-2">Use Sourcegraph if you're:</div>
+                <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Enterprise with 100+ developers needing code search UI</li>
+                    <li>• Doing batch code migrations across repos</li>
+                    <li>• Need compliance/audit trails for code access</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Getting Started -->
+<section class="py-20 bg-gray-50 border-t border-gray-100">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Getting Started</h2>
+        <p class="text-xl text-gray-500 mb-8 max-w-2xl mx-auto">
+            We offer 100 free requests to get started. No credit card required. If you're building AI coding tools and want to try it:
+        </p>
+        <div class="flex justify-center gap-4">
+            <a href="/" class="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg text-sm font-medium hover:bg-gray-800">
+                Request API Access →
+            </a>
+            <a href="/docs.html" class="inline-block border border-gray-300 text-gray-700 px-8 py-3 rounded-lg text-sm font-medium hover:border-gray-400 bg-white">
+                View API Docs
+            </a>
+        </div>
+    </div>
+</section>
+
+</main>
+<footer id="cta" class="py-20 bg-white border-t border-gray-100" aria-labelledby="cta-heading">
+    <div class="max-w-lg mx-auto px-6 text-center">
+        <!-- Trust bar -->
+        <div class="flex flex-wrap justify-center gap-6 text-xs text-gray-400">
+            <span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg> No code storage</span>
+            <span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg> Temp dir cleanup</span>
+            <span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg> Token used once</span>
+        </div>
+        
+        <div class="flex justify-center gap-8 text-sm text-gray-500 mt-8">
+            <a href="/how-it-works.html" class="hover:text-gray-900">How It Works</a>
+            <a href="/evaluation.html" class="hover:text-gray-900">Evaluation</a>
+            <a href="/docs.html" class="hover:text-gray-900">API Docs</a>
+        </div>
+        
+        <p class="text-xs text-gray-400 mt-4 text-center">© 2025 ContextPacker. Code context API for AI agents.</p>
+    </div>
+</footer>
+
+</body>
+</html>

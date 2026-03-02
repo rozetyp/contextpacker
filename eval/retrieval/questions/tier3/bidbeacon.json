@@ -1,0 +1,90 @@
+{
+  "repo_url": "https://github.com/rozetyp/bidbeacon",
+  "description": "BidBeacon - Federal contract opportunities daily email digest with SAM.gov integration",
+  "language": "typescript",
+  "tier": "private",
+  "is_private": true,
+  "questions": [
+    {
+      "id": "bidbeacon_easy_01",
+      "query": "Where is the main app layout defined?",
+      "ground_truth_files": ["app/layout.tsx"],
+      "alternatives": ["app/page.tsx"],
+      "difficulty": "easy",
+      "category": "entry",
+      "notes": "Next.js root layout"
+    },
+    {
+      "id": "bidbeacon_easy_02",
+      "query": "Where is the Prisma database client configured?",
+      "ground_truth_files": ["lib/prisma.ts"],
+      "alternatives": ["prisma/schema.prisma"],
+      "difficulty": "easy",
+      "category": "data",
+      "notes": "Prisma client instantiation"
+    },
+    {
+      "id": "bidbeacon_medium_01",
+      "query": "How are opportunities fetched from SAM.gov?",
+      "ground_truth_files": ["lib/fetchOpportunities.ts"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation",
+      "notes": "fetchOpportunities function with caching"
+    },
+    {
+      "id": "bidbeacon_medium_02",
+      "query": "How are email digests sent to users?",
+      "ground_truth_files": ["lib/email.ts"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation",
+      "notes": "sendDigestEmail using Resend"
+    },
+    {
+      "id": "bidbeacon_medium_03",
+      "query": "How does the search API work?",
+      "ground_truth_files": ["app/api/search/route.ts"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "api",
+      "notes": "Search endpoint for saved searches"
+    },
+    {
+      "id": "bidbeacon_hard_01",
+      "query": "How does the daily digest cron job work?",
+      "ground_truth_files": ["scripts/dailyDigest.ts", "app/api/cron-manager/route.ts"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "architecture",
+      "notes": "Cron scheduling and digest execution"
+    },
+    {
+      "id": "bidbeacon_hard_02",
+      "query": "How does the mute functionality work for unwanted opportunities?",
+      "ground_truth_files": ["lib/muteTokens.ts", "app/u/mute/route.ts"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "implementation",
+      "notes": "Token-based mute links in emails"
+    },
+    {
+      "id": "bidbeacon_hard_03",
+      "query": "How does Stripe webhook handling work?",
+      "ground_truth_files": ["app/api/webhooks/stripe/route.ts"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "payments",
+      "notes": "Stripe subscription webhooks"
+    },
+    {
+      "id": "bidbeacon_expert_01",
+      "query": "How is rate limiting implemented for API calls?",
+      "ground_truth_files": ["lib/rateLimiter.ts"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture",
+      "notes": "Rate limiting with caching"
+    }
+  ]
+}

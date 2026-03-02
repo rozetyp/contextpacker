@@ -1,0 +1,64 @@
+{
+  "repo_url": "https://github.com/encode/databases",
+  "description": "Databases - Async database support for Python",
+  "language": "python",
+  "tier": "obscure",
+  "questions": [
+    {
+      "id": "databases_easy_01",
+      "query": "Where is the Database class?",
+      "ground_truth_files": ["databases/core.py"],
+      "alternatives": ["databases/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "databases_easy_02",
+      "query": "Where are database backends implemented?",
+      "ground_truth_files": ["databases/backends/postgres.py", "databases/backends/mysql.py", "databases/backends/sqlite.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "databases_medium_01",
+      "query": "How does the connection pool work?",
+      "ground_truth_files": ["databases/core.py"],
+      "alternatives": ["databases/backends/postgres.py"],
+      "difficulty": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "databases_medium_02",
+      "query": "How are transactions handled?",
+      "ground_truth_files": ["databases/core.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "databases_hard_01",
+      "query": "How does databases integrate with different async drivers?",
+      "ground_truth_files": ["databases/backends/postgres.py", "databases/backends/mysql.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "architecture"
+    },
+    {
+      "id": "databases_hard_02",
+      "query": "Where would I add query logging?",
+      "ground_truth_files": ["databases/core.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "vague"
+    },
+    {
+      "id": "databases_expert_01",
+      "query": "Why might connections leak in a long-running app?",
+      "ground_truth_files": ["databases/core.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging"
+    }
+  ]
+}

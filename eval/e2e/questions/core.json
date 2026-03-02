@@ -1,0 +1,126 @@
+{
+  "version": "1.0",
+  "description": "E2E answer quality benchmark - tests if LLM answers are correct with CP context",
+  "questions": [
+    {
+      "id": "e2e_001",
+      "repo_url": "https://github.com/pallets/flask",
+      "query": "How does the request lifecycle work from WSGI call to response?",
+      "key_facts": [
+        "wsgi_app() in flask/app.py is the WSGI entry point",
+        "RequestContext is pushed before dispatch",
+        "full_dispatch_request() handles the request after before_request hooks",
+        "Response object is built and finalize_request() is called"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "e2e_002",
+      "repo_url": "https://github.com/pallets/flask",
+      "query": "What's the relationship between Flask app and Blueprint?",
+      "key_facts": [
+        "Blueprint is a deferred app fragment",
+        "register_blueprint() copies rules to app",
+        "Both inherit from Scaffold base class",
+        "Blueprints support URL prefix and subdomain"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "e2e_003",
+      "repo_url": "https://github.com/tiangolo/fastapi",
+      "query": "How does FastAPI handle dependency injection?",
+      "key_facts": [
+        "Depends() creates a dependency",
+        "Dependencies are resolved by the DependencyInjector",
+        "Sub-dependencies are resolved recursively",
+        "Caching can be controlled with use_cache parameter"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "e2e_004",
+      "repo_url": "https://github.com/tiangolo/fastapi",
+      "query": "How does FastAPI validate request bodies with Pydantic?",
+      "key_facts": [
+        "Body parameters use Pydantic models",
+        "request_body_to_args() extracts and validates",
+        "ValidationError is caught and converted to 422 response",
+        "Schema is generated from Pydantic model"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "e2e_005",
+      "repo_url": "https://github.com/encode/starlette",
+      "query": "How does Starlette's routing work?",
+      "key_facts": [
+        "Route class matches URL patterns",
+        "Router handles the route table",
+        "Mounting allows nested applications",
+        "Path parameters are extracted via regex"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "e2e_006",
+      "repo_url": "https://github.com/psf/requests",
+      "query": "How does requests handle session cookies?",
+      "key_facts": [
+        "Session maintains a CookieJar",
+        "Cookies are merged from response",
+        "prepare_request() adds session cookies",
+        "Cookies persist across requests in session"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "e2e_007",
+      "repo_url": "https://github.com/pydantic/pydantic",
+      "query": "How does Pydantic v2 validate nested models?",
+      "key_facts": [
+        "Nested models are validated recursively",
+        "pydantic-core handles the validation",
+        "Schema is built for nested structure",
+        "Errors include path to nested field"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "e2e_008",
+      "repo_url": "https://github.com/gin-gonic/gin",
+      "query": "How does Gin's middleware chain work?",
+      "key_facts": [
+        "Handlers are stored in a slice",
+        "c.Next() calls the next handler",
+        "c.Abort() stops the chain",
+        "Middleware runs in order of registration"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "e2e_009",
+      "repo_url": "https://github.com/pallets/flask",
+      "query": "How does Flask's g object work for request-scoped data?",
+      "key_facts": [
+        "g is a proxy to _app_ctx_stack.top.g",
+        "Each request gets a fresh g object",
+        "g is stored on the app context",
+        "Values are not shared between requests"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "e2e_010",
+      "repo_url": "https://github.com/tiangolo/fastapi",
+      "query": "How does FastAPI generate OpenAPI documentation?",
+      "key_facts": [
+        "get_openapi() builds the schema",
+        "Routes are introspected for parameters",
+        "Pydantic models become JSON Schema",
+        "Tags and descriptions come from decorators"
+      ],
+      "difficulty": "medium"
+    }
+  ]
+}

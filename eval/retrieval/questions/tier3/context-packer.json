@@ -1,0 +1,65 @@
+{
+  "repo_url": "https://github.com/rozetyp/Context-Packer",
+  "description": "ContextPacker - The code context API (this project!)",
+  "language": "python",
+  "tier": "private",
+  "is_private": true,
+  "questions": [
+    {
+      "id": "cp_easy_01",
+      "query": "Where is the main API entrypoint?",
+      "ground_truth_files": ["context_packer/main.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "cp_easy_02",
+      "query": "Where is the orchestrator that coordinates file selection?",
+      "ground_truth_files": ["context_packer/orchestrator.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "cp_medium_01",
+      "query": "How does ContextPacker analyze code symbols?",
+      "ground_truth_files": ["context_packer/symbols.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "cp_medium_02",
+      "query": "How does ContextPacker select relevant files?",
+      "ground_truth_files": ["context_packer/selector.py"],
+      "alternatives": ["context_packer/orchestrator.py"],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "cp_hard_01",
+      "query": "How does the caching system work?",
+      "ground_truth_files": ["context_packer/cache.py", "context_packer/repo_cache.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "architecture"
+    },
+    {
+      "id": "cp_hard_02",
+      "query": "How does ContextPacker handle private repositories?",
+      "ground_truth_files": ["context_packer/git_utils.py", "context_packer/main.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "implementation"
+    },
+    {
+      "id": "cp_expert_01",
+      "query": "Why might a query return irrelevant files?",
+      "ground_truth_files": ["context_packer/selector.py", "context_packer/orchestrator.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging"
+    }
+  ]
+}

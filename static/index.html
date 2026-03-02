@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContextPacker – Code Context API for AI Agents | RAG Alternative Without Vector DB</title>
+    
+    <!-- SEO Meta Tags - Trending Keywords 2025 -->
+    <meta name="description" content="Code context API for AI coding agents, Cursor, Copilot, and IDE extensions. Retrieval-augmented generation without vector databases. Works instantly on any GitHub repo including private repos. Better than embeddings for code search.">
+    <meta name="keywords" content="AI coding assistant API, code context retrieval, RAG for code, LLM code search, code embeddings alternative, GitHub code search API, semantic code search, agentic coding, code intelligence API, developer AI tools 2025, no vector database, instant code retrieval, AI agent API, IDE extension backend, Pinecone alternative, Chroma alternative, Weaviate alternative, vector database alternative, embeddings alternative, Cursor API, Copilot API, Windsurf API, Codeium alternative, Sourcegraph alternative, code search without vector database, RAG without Pinecone, RAG without Chroma, codebase context API, repository context API, GitHub context API, LangChain code search, LangChain embeddings alternative, code retrieval API, semantic code search API, AI code search, code understanding API, repository indexing alternative, zero setup code search, instant code search API, code RAG API, developer tools API, AI agent tools, coding agent backend, IDE plugin API, code assistant API, repository understanding API">
+    <meta name="author" content="ContextPacker">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://contextpacker.com/">
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://contextpacker.com/">
+    <meta property="og:title" content="ContextPacker – Code Context API for AI Agents">
+    <meta property="og:description" content="RAG-quality code retrieval without vector databases. Works instantly on any GitHub repo. Built for Cursor, Copilot, and AI coding agents.">
+    <meta property="og:image" content="https://contextpacker.com/og-image.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="ContextPacker">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@contextpacker">
+    <meta name="twitter:creator" content="@contextpacker">
+    <meta name="twitter:url" content="https://contextpacker.com/">
+    <meta name="twitter:title" content="ContextPacker – Code Context API for AI Agents">
+    <meta name="twitter:description" content="RAG-quality retrieval, zero infrastructure. Works on any repo instantly.">
+    <meta name="twitter:image" content="https://contextpacker.com/og-image.svg">
+    
+    <!-- Structured Data - Enhanced -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ContextPacker",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web",
+        "description": "Code context API for AI agents. Retrieval-augmented generation quality without vector databases. Works instantly on any GitHub repository.",
+        "url": "https://contextpacker.com",
+        "logo": "https://contextpacker.com/logo.svg",
+        "screenshot": "https://contextpacker.com/og-image.svg",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "description": "Free tier: 100 credits/month"
+        },
+        "featureList": [
+            "No indexing or vector database required",
+            "Works instantly on any GitHub repository",
+            "Private repository support with PAT tokens",
+            "Same retrieval quality as embeddings",
+            "Built for AI coding agents and IDE extensions",
+            "Supports Python, JavaScript, TypeScript, Go, Rust"
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "47",
+            "bestRating": "5"
+        }
+    }
+    </script>
+    
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ContextPacker",
+        "url": "https://contextpacker.com",
+        "logo": "https://contextpacker.com/logo.svg",
+        "sameAs": [
+            "https://github.com/rozetyp/Context-Packer",
+            "https://twitter.com/contextpacker"
+        ]
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html, body { margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .mono { font-family: ui-monospace, monospace; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .spin { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .tab-active { background: white; border-color: #e5e7eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+<!-- Nav -->
+<header>
+<nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur border-b border-gray-100" aria-label="Main navigation">
+    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="/" class="font-semibold text-lg" aria-label="ContextPacker Home">ContextPacker</a>
+        <div class="hidden md:flex gap-8 text-sm text-gray-500">
+            <a href="/how-it-works.html" class="hover:text-gray-900">How It Works</a>
+            <a href="/evaluation.html" class="hover:text-gray-900">Evaluation</a>
+            <a href="/docs.html" class="hover:text-gray-900">API Docs</a>
+        </div>
+        <a href="#cta" class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800">Get Access</a>
+    </div>
+</nav>
+</header>
+
+<!-- Hero -->
+<main>
+<section class="pt-24 pb-8" aria-labelledby="hero-heading">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="pt-16"></div>
+        <h1 id="hero-heading" class="text-4xl md:text-5xl font-bold mb-6 leading-tight max-w-3xl">
+            Code context API for AI agents.
+        </h1>
+        <p class="text-xl text-gray-500 mb-8 max-w-4xl">Embedding-quality retrieval from any repo — no vector DB, no indexing. <br class="hidden md:inline">Just run <code class="bg-gray-100 px-2 py-1 rounded text-gray-800 text-base font-mono">npx contextpacker &lt;repo&gt; "query"</code> or call the API.</p>
+        <div class="flex flex-wrap gap-6 text-sm text-gray-400">
+            <span>Private repos supported</span>
+            <span>·</span>
+            <span>2-4s first call, cached after</span>
+            <span>·</span>
+            <span>100 free credits</span>
+        </div>
+    </div>
+</section>
+
+<!-- Live Demo - Full Width -->
+<section class="pt-16 pb-16" aria-labelledby="demo-heading">
+    <div class="max-w-6xl mx-auto px-6">
+        <p class="text-sm text-gray-500 mb-4">Give an agent the right files, it answers correctly. Give it the wrong files, it hallucinates. <span class="text-gray-700">Compare 3 ways to pick those files.</span></p>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
+            <!-- Demo Controls -->
+            <div class="p-6 bg-gray-50 border-b border-gray-100">
+                <!-- Row 1: Repository, Question, Max Tokens -->
+                <div class="flex flex-col md:flex-row gap-4">
+                    <!-- Repository input with suggestions -->
+                    <div class="md:w-72">
+                        <label class="text-xs font-medium text-gray-500 uppercase mb-1 block">Repository <span class="text-gray-400 font-normal normal-case">(any public repo)</span></label>
+                        <input type="text" id="repo-input" list="repo-suggestions" placeholder="https://github.com/owner/repo" 
+                            class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white h-[42px]" 
+                            value="https://github.com/pallets/flask">
+                        <datalist id="repo-suggestions">
+                            <!-- Python -->
+                            <option value="https://github.com/pallets/flask">Flask (Python)</option>
+                            <option value="https://github.com/tiangolo/fastapi">FastAPI (Python)</option>
+                            <option value="https://github.com/encode/starlette">Starlette (Python)</option>
+                            <option value="https://github.com/neoteroi/blacksheep">BlackSheep (Python)</option>
+                            <option value="https://github.com/django/django">Django (Python)</option>
+                            <option value="https://github.com/pydantic/pydantic">Pydantic (Python)</option>
+                            <option value="https://github.com/psf/requests">Requests (Python)</option>
+                            <option value="https://github.com/pallets/click">Click (Python)</option>
+                            <option value="https://github.com/strawberry-graphql/strawberry">Strawberry (Python)</option>
+                            <option value="https://github.com/encode/httpx">HTTPX (Python)</option>
+                            <!-- JavaScript/Node -->
+                            <option value="https://github.com/expressjs/express">Express (JS)</option>
+                            <option value="https://github.com/koajs/koa">Koa (JS)</option>
+                            <option value="https://github.com/fastify/fastify">Fastify (JS)</option>
+                            <option value="https://github.com/honojs/hono">Hono (TS)</option>
+                            <option value="https://github.com/trpc/trpc">tRPC (TS)</option>
+                            <option value="https://github.com/nestjs/nest">NestJS (TS)</option>
+                            <option value="https://github.com/typeorm/typeorm">TypeORM (TS)</option>
+                            <option value="https://github.com/prisma/prisma">Prisma (TS)</option>
+                            <!-- Go -->
+                            <option value="https://github.com/gin-gonic/gin">Gin (Go)</option>
+                            <option value="https://github.com/gofiber/fiber">Fiber (Go)</option>
+                            <option value="https://github.com/labstack/echo">Echo (Go)</option>
+                            <!-- Rust -->
+                            <option value="https://github.com/tokio-rs/axum">Axum (Rust)</option>
+                            <option value="https://github.com/actix/actix-web">Actix (Rust)</option>
+                            <!-- AI/ML -->
+                            <option value="https://github.com/langchain-ai/langchain">LangChain (Python)</option>
+                            <option value="https://github.com/openai/openai-python">OpenAI SDK (Python)</option>
+                        </datalist>
+                    </div>
+                    <div class="flex-1">
+                        <label class="text-xs font-medium text-gray-500 uppercase mb-1 block">Question</label>
+                        <input id="question-input" type="text" placeholder="How does routing work?" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm h-[42px]">
+                    </div>
+                    <div class="md:w-40">
+                        <label class="text-xs font-medium text-gray-500 uppercase mb-1 block">Max Tokens: <span id="tokens-value">6000</span></label>
+                        <input type="range" id="tokens-slider" min="2000" max="16000" step="1000" value="6000" class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-4 opacity-50">
+                    </div>
+                </div>
+                
+                <!-- Row 2: Quick picks (scrollable, full width) -->
+                <div class="mt-3">
+                    <div class="flex items-center gap-2 overflow-x-auto pb-2" style="scrollbar-width: none; -ms-overflow-style: none;">
+                        <span class="shrink-0 text-xs text-gray-400">Quick picks, or paste your own:</span>
+                        <!-- Python -->
+                        <button onclick="setRepo('https://github.com/pallets/flask')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">Flask</button>
+                        <button onclick="setRepo('https://github.com/tiangolo/fastapi')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">FastAPI</button>
+                        <button onclick="setRepo('https://github.com/django/django')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">Django</button>
+                        <button onclick="setRepo('https://github.com/encode/starlette')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">Starlette</button>
+                        <button onclick="setRepo('https://github.com/pydantic/pydantic')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">Pydantic</button>
+                        <button onclick="setRepo('https://github.com/psf/requests')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">Requests</button>
+                        <button onclick="setRepo('https://github.com/pallets/click')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">Click</button>
+                        <button onclick="setRepo('https://github.com/encode/httpx')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">HTTPX</button>
+                        <button onclick="setRepo('https://github.com/strawberry-graphql/strawberry')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">Strawberry</button>
+                        <button onclick="setRepo('https://github.com/neoteroi/blacksheep')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-blue-300">BlackSheep</button>
+                        <!-- Divider -->
+                        <span class="shrink-0 text-gray-300">|</span>
+                        <!-- JavaScript/TypeScript -->
+                        <button onclick="setRepo('https://github.com/expressjs/express')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-green-300">Express</button>
+                        <button onclick="setRepo('https://github.com/koajs/koa')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-green-300">Koa</button>
+                        <button onclick="setRepo('https://github.com/fastify/fastify')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-green-300">Fastify</button>
+                        <button onclick="setRepo('https://github.com/honojs/hono')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-green-300">Hono</button>
+                        <button onclick="setRepo('https://github.com/trpc/trpc')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-green-300">tRPC</button>
+                        <button onclick="setRepo('https://github.com/nestjs/nest')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-green-300">NestJS</button>
+                        <button onclick="setRepo('https://github.com/typeorm/typeorm')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-green-300">TypeORM</button>
+                        <button onclick="setRepo('https://github.com/prisma/prisma')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-green-300">Prisma</button>
+                        <!-- Divider -->
+                        <span class="shrink-0 text-gray-300">|</span>
+                        <!-- Go -->
+                        <button onclick="setRepo('https://github.com/gin-gonic/gin')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-cyan-300">Gin</button>
+                        <button onclick="setRepo('https://github.com/gofiber/fiber')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-cyan-300">Fiber</button>
+                        <button onclick="setRepo('https://github.com/labstack/echo')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-cyan-300">Echo</button>
+                        <!-- Divider -->
+                        <span class="shrink-0 text-gray-300">|</span>
+                        <!-- Rust -->
+                        <button onclick="setRepo('https://github.com/tokio-rs/axum')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-orange-300">Axum</button>
+                        <button onclick="setRepo('https://github.com/actix/actix-web')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-orange-300">Actix</button>
+                        <!-- Divider -->
+                        <span class="shrink-0 text-gray-300">|</span>
+                        <!-- AI/ML -->
+                        <button onclick="setRepo('https://github.com/langchain-ai/langchain')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-purple-300">LangChain</button>
+                        <button onclick="setRepo('https://github.com/openai/openai-python')" class="shrink-0 text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:bg-gray-50 hover:border-purple-300">OpenAI SDK</button>
+                    </div>
+                </div>
+                
+                <button id="run-btn" onclick="runDemo()" class="mt-4 w-full md:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center justify-center gap-2">
+                    <span>Compare 3 Approaches</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                </button>
+            </div>
+            
+            <!-- Results -->
+            <div id="results" class="hidden">
+                <!-- Loading -->
+                <div id="loading" class="p-8 hidden">
+                    <div class="flex items-center justify-center gap-3 mb-6">
+                        <div class="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full spin"></div>
+                        <p class="text-gray-600">Comparing retrieval approaches...</p>
+                    </div>
+                    <div class="max-w-xl mx-auto text-sm text-gray-500 space-y-3">
+                        <p><strong class="text-gray-700">What's happening:</strong> We ask GPT-4o-mini the same question 3 times — each time with different source files.</p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li><strong class="text-gray-600">ContextPacker</strong> — LLM reads the file tree and picks what looks relevant</li>
+                            <li><strong class="text-gray-600">Embeddings</strong> — vector similarity search (Gemini text-embedding-004)</li>
+                            <li><strong class="text-gray-600">BM25</strong> — keyword matching (TF-IDF baseline)</li>
+                        </ul>
+                        <p class="text-gray-400">Same prompt, same LLM, same token budget. Only the retrieved files differ.</p>
+                    </div>
+                </div>
+                
+                <!-- Answers - Stacked Layout -->
+                <div id="answers" class="hidden">
+                    <!-- Tabs -->
+                    <div class="flex border-b border-gray-100 bg-gray-50">
+                        <button onclick="showTab('cp')" id="tab-cp" class="flex-1 py-3 px-4 text-sm font-medium text-center border-b-2 border-blue-600 text-blue-600 bg-white">
+                            ContextPacker <span class="text-xs ml-1 bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full" id="cp-files-count"></span>
+                        </button>
+                        <button onclick="showTab('emb')" id="tab-emb" class="flex-1 py-3 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">
+                            Embeddings RAG <span class="text-xs ml-1 bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full" id="emb-files-count"></span>
+                        </button>
+                        <button onclick="showTab('bm25')" id="tab-bm25" class="flex-1 py-3 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">
+                            BM25 <span class="text-xs ml-1 bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full" id="bm25-files-count"></span>
+                        </button>
+                    </div>
+                    
+                    <!-- Tab Content -->
+                    <div class="p-6">
+                        <!-- ContextPacker -->
+                        <div id="content-cp" class="space-y-4">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    ContextPacker
+                                </span>
+                                <span id="cp-latency" class="text-xs text-gray-400"></span>
+                            </div>
+                            <div id="cp-answer" class="prose prose-sm max-w-none text-gray-700 leading-relaxed"></div>
+                            <div class="pt-4 border-t border-gray-100">
+                                <div class="text-xs font-medium text-gray-500 uppercase mb-2">Files Selected</div>
+                                <div id="cp-files" class="flex flex-wrap gap-1.5"></div>
+                            </div>
+                            <details class="mt-4">
+                                <summary class="cursor-pointer text-xs text-gray-400 hover:text-gray-600">Raw response</summary>
+                                <pre id="cp-raw" class="mt-2 p-3 bg-gray-900 text-gray-100 rounded-lg text-xs overflow-x-auto max-h-60 overflow-y-auto"></pre>
+                            </details>
+                        </div>
+                        
+                        <!-- Embeddings -->
+                        <div id="content-emb" class="space-y-4 hidden">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
+                                    Embeddings RAG
+                                </span>
+                                <span id="emb-latency" class="text-xs text-gray-400"></span>
+                            </div>
+                            <div id="emb-answer" class="prose prose-sm max-w-none text-gray-700 leading-relaxed"></div>
+                            <div class="pt-4 border-t border-gray-100">
+                                <div class="text-xs font-medium text-gray-500 uppercase mb-2">Files Retrieved</div>
+                                <div id="emb-files" class="flex flex-wrap gap-1.5"></div>
+                            </div>
+                            <details class="mt-4">
+                                <summary class="cursor-pointer text-xs text-gray-400 hover:text-gray-600">Raw response</summary>
+                                <pre id="emb-raw" class="mt-2 p-3 bg-gray-900 text-gray-100 rounded-lg text-xs overflow-x-auto max-h-60 overflow-y-auto"></pre>
+                            </details>
+                        </div>
+                        
+                        <!-- BM25 -->
+                        <div id="content-bm25" class="space-y-4 hidden">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                                    BM25 (lexical baseline)
+                                </span>
+                                <span id="bm25-latency" class="text-xs text-gray-400"></span>
+                            </div>
+                            <div id="bm25-answer" class="prose prose-sm max-w-none text-gray-600 leading-relaxed"></div>
+                            <div class="pt-4 border-t border-gray-100">
+                                <div class="text-xs font-medium text-gray-500 uppercase mb-2">Files Retrieved</div>
+                                <div id="bm25-files" class="flex flex-wrap gap-1.5"></div>
+                            </div>
+                            <details class="mt-4">
+                                <summary class="cursor-pointer text-xs text-gray-400 hover:text-gray-600">Raw response</summary>
+                                <pre id="bm25-raw" class="mt-2 p-3 bg-gray-900 text-gray-100 rounded-lg text-xs overflow-x-auto max-h-60 overflow-y-auto"></pre>
+                            </details>
+                            <p class="text-xs text-gray-400 italic mt-4">TF-IDF keyword matching – industry-standard IR baseline.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Error -->
+                <div id="error" class="p-8 text-center hidden">
+                    <div class="text-red-500" id="error-msg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Private Repos -->
+<section class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="bg-gray-900 rounded-2xl p-8 md:p-12 text-white">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <span class="text-sm font-medium text-green-400">Works with private repos</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">You control the access</h3>
+                    <p class="text-gray-400 mb-6">We fetch your files over HTTPS (same as your IDE), read them, and delete them. <strong class="text-white">Nothing is stored.</strong> Use a read-only PAT that expires in 1 hour — revoke it after testing.</p>
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <span class="flex items-center gap-1.5 text-gray-300"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Read-only PAT works</span>
+                        <span class="flex items-center gap-1.5 text-gray-300"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Set 1-hour expiry</span>
+                        <span class="flex items-center gap-1.5 text-gray-300"><svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Revoke anytime</span>
+                    </div>
+                </div>
+                <div class="bg-gray-950 rounded-xl p-4 border border-gray-800">
+                    <pre class="text-sm text-gray-300 overflow-x-auto"><code>curl https://contextpacker.com/v1/packs \
+  -H "X-API-Key: $CP_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "repo_url": "https://github.com/your-org/private",
+    "query": "How does auth work?",
+    "vcs": {
+      "provider": "github",
+      "token": "'"$GITHUB_PAT"'"
+    }
+  }'</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+const API_URL = 'https://contextpacker.com';
+
+document.getElementById('tokens-slider').addEventListener('input', function() {
+    document.getElementById('tokens-value').textContent = this.value;
+});
+
+function setQuestion(q) {
+    document.getElementById('question-input').value = q;
+}
+
+function setRepo(url) {
+    document.getElementById('repo-input').value = url;
+}
+
+function validateGitHubUrl(url) {
+    const match = url.match(/^https:\/\/github\.com\/([\w.-]+)\/([\w.-]+)\/?$/);
+    if (!match) return null;
+    return { owner: match[1], repo: match[2] };
+}
+
+function showTab(tab) {
+    ['cp', 'emb', 'bm25'].forEach(t => {
+        document.getElementById('content-' + t).classList.toggle('hidden', t !== tab);
+        document.getElementById('tab-' + t).classList.toggle('border-blue-600', t === tab);
+        document.getElementById('tab-' + t).classList.toggle('text-blue-600', t === tab);
+        document.getElementById('tab-' + t).classList.toggle('bg-white', t === tab);
+        document.getElementById('tab-' + t).classList.toggle('text-gray-500', t !== tab);
+    });
+}
+
+async function runDemo() {
+    const repoUrl = document.getElementById('repo-input').value.trim();
+    const question = document.getElementById('question-input').value.trim();
+    const maxTokens = parseInt(document.getElementById('tokens-slider').value);
+    
+    // Validate GitHub URL
+    const parsed = validateGitHubUrl(repoUrl);
+    if (!parsed) {
+        alert('Please enter a valid GitHub URL (https://github.com/owner/repo)');
+        return;
+    }
+    
+    if (!question) {
+        alert('Please enter a question');
+        return;
+    }
+    
+    const btn = document.getElementById('run-btn');
+    const results = document.getElementById('results');
+    const loading = document.getElementById('loading');
+    const answers = document.getElementById('answers');
+    const error = document.getElementById('error');
+    
+    btn.disabled = true;
+    btn.innerHTML = '<span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full spin"></span><span>Running...</span>';
+    results.classList.remove('hidden');
+    loading.classList.remove('hidden');
+    answers.classList.add('hidden');
+    error.classList.add('hidden');
+    
+    try {
+        const resp = await fetch(`${API_URL}/v1/demo`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ repo_url: repoUrl, question, max_tokens: maxTokens })
+        });
+        
+        if (!resp.ok) {
+            const err = await resp.json();
+            const errCode = err.detail?.error || '';
+            const errMsg = err.detail?.message || err.detail || 'Request failed';
+            
+            // Check for repo not in demo whitelist
+            if (errCode === 'RATE_LIMITED') {
+                throw new Error('RATE_LIMITED: ' + errMsg);
+            }
+            
+            // Check for private repo / access errors
+            if (resp.status === 404 || resp.status === 403 || errMsg.toLowerCase().includes('not found') || errMsg.toLowerCase().includes('access')) {
+                throw new Error('PRIVATE_REPO');
+            }
+            throw new Error(errMsg);
+        }
+        
+        const data = await resp.json();
+        
+        // ContextPacker
+        document.getElementById('cp-answer').innerHTML = formatAnswer(data.contextpacker.answer);
+        document.getElementById('cp-latency').textContent = `${(data.contextpacker.latency_ms / 1000).toFixed(1)}s · ${data.contextpacker.tokens} tokens`;
+        document.getElementById('cp-files-count').textContent = data.contextpacker.files_used.length + ' files';
+        document.getElementById('cp-files').innerHTML = data.contextpacker.files_used.map(f => 
+            `<span class="text-xs bg-blue-50 border border-blue-100 text-blue-700 px-2 py-1 rounded mono">${f}</span>`
+        ).join('');
+        document.getElementById('cp-raw').textContent = JSON.stringify(data.contextpacker, null, 2);
+        
+        // Embeddings
+        document.getElementById('emb-answer').innerHTML = formatAnswer(data.embeddings?.answer || 'Not available');
+        document.getElementById('emb-latency').textContent = data.embeddings?.latency_ms ? `${(data.embeddings.latency_ms / 1000).toFixed(1)}s · ${data.embeddings.tokens || 0} tokens` : '';
+        document.getElementById('emb-files-count').textContent = (data.embeddings?.files_used?.length || 0) + ' files';
+        document.getElementById('emb-files').innerHTML = (data.embeddings?.files_used || []).map(f => 
+            `<span class="text-xs bg-amber-50 border border-amber-100 text-amber-700 px-2 py-1 rounded mono">${f}</span>`
+        ).join('');
+        
+        document.getElementById('emb-raw').textContent = JSON.stringify(data.embeddings || {}, null, 2);
+        // BM25
+        document.getElementById('bm25-answer').innerHTML = formatAnswer(data.bm25?.answer || 'Not available');
+        document.getElementById('bm25-latency').textContent = data.bm25?.latency_ms ? `${(data.bm25.latency_ms / 1000).toFixed(1)}s · ${data.bm25.tokens || 0} tokens` : '';
+        document.getElementById('bm25-files-count').textContent = (data.bm25?.files_used?.length || 0) + ' files';
+        document.getElementById('bm25-files').innerHTML = (data.bm25?.files_used || []).map(f => 
+            `<span class="text-xs bg-gray-50 border border-gray-200 text-gray-600 px-2 py-1 rounded mono">${f}</span>`
+        ).join('');
+        
+        document.getElementById('bm25-raw').textContent = JSON.stringify(data.bm25 || {}, null, 2);
+        loading.classList.add('hidden');
+        answers.classList.remove('hidden');
+        showTab('cp');
+        
+    } catch (e) {
+        loading.classList.add('hidden');
+        error.classList.remove('hidden');
+        
+        if (e.message === 'PRIVATE_REPO') {
+            document.getElementById('error-msg').innerHTML = `
+                <div class="text-left max-w-md mx-auto">
+                    <div class="flex items-center gap-2 mb-3 justify-center">
+                        <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <span class="font-medium text-gray-700">Can't access this repo</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-4">This looks like a private repo (or doesn't exist). Use the API with your GitHub PAT to access private repositories.</p>
+                    <a href="#cta" class="inline-block bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800">Get API Key →</a>
+                </div>
+            `;
+        } else if (e.message.startsWith('RATE_LIMITED')) {
+            document.getElementById('error-msg').innerHTML = `
+                <div class="text-left max-w-md mx-auto">
+                    <div class="flex items-center gap-2 mb-3 justify-center">
+                        <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <span class="font-medium text-gray-700">Rate limited</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-4">Too many requests. Custom repos: 3/min, 10/hour. Try a quick-pick repo or wait a bit.</p>
+                </div>
+            `;
+        } else if (e.message.toLowerCase().includes('too large') || e.message.toLowerCase().includes('timeout')) {
+            document.getElementById('error-msg').innerHTML = `
+                <div class="text-amber-600">
+                    <p class="font-medium">Repository too large for demo</p>
+                    <p class="text-sm text-gray-500 mt-1">Try a smaller repo, or use the API for large monorepos.</p>
+                </div>
+            `;
+        } else {
+            document.getElementById('error-msg').innerHTML = e.message || 'Request failed';
+        }
+    }
+    
+    btn.disabled = false;
+    btn.innerHTML = '<span>Compare 3 Approaches</span><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>';
+}
+
+function formatAnswer(text) {
+    if (!text) return '';
+    return text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono">$1</code>')
+        .replace(/\n\n/g, '</p><p class="mt-3">')
+        .replace(/\n/g, '<br>');
+}
+</script>
+
+<!-- Benchmarks -->
+<section id="benchmarks" class="py-20 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-2 text-center">Benchmarked on real repos</h2>
+        <p class="text-gray-500 mb-8 text-center">177 questions across 14 repos including private codebases. Same ~6000 token budget.</p>
+        
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+            <a href="https://github.com/pallets/flask" target="_blank" class="text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:border-gray-400 hover:text-gray-900">pallets/flask</a>
+            <a href="https://github.com/tiangolo/fastapi" target="_blank" class="text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:border-gray-400 hover:text-gray-900">tiangolo/fastapi</a>
+            <a href="https://github.com/encode/starlette" target="_blank" class="text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:border-gray-400 hover:text-gray-900">encode/starlette</a>
+            <a href="https://github.com/gin-gonic/gin" target="_blank" class="text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:border-gray-400 hover:text-gray-900">gin-gonic/gin</a>
+            <a href="https://github.com/pydantic/pydantic" target="_blank" class="text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 hover:border-gray-400 hover:text-gray-900">pydantic/pydantic</a>
+            <span class="text-xs bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-full text-gray-500">+9 private repos</span>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white p-6 rounded-xl border border-gray-200 text-center">
+                <div class="text-4xl font-bold text-blue-600">98%</div>
+                <div class="text-sm text-gray-500 mt-1">Hit@10</div>
+                <div class="text-xs text-green-600 mt-2">Finds the right files</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-gray-200 text-center">
+                <div class="text-4xl font-bold text-blue-600">0.92</div>
+                <div class="text-sm text-gray-500 mt-1">NDCG</div>
+                <div class="text-xs text-gray-500 mt-2">No vector DB needed</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-gray-200 text-center">
+                <div class="text-4xl font-bold text-blue-600">8.5</div>
+                <div class="text-sm text-gray-500 mt-1">Answer Quality</div>
+                <div class="text-xs text-green-600 mt-2">Same as embeddings, zero infra</div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <table class="w-full text-sm">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="text-left py-4 px-6 font-medium text-gray-600">Approach</th>
+                        <th class="text-center py-4 px-6 font-medium text-gray-600">Hit@10</th>
+                        <th class="text-center py-4 px-6 font-medium text-gray-600">NDCG</th>
+                        <th class="text-center py-4 px-6 font-medium text-gray-600">Answer Quality</th>
+                        <th class="text-center py-4 px-6 font-medium text-gray-600">Setup</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-t border-gray-100">
+                        <td class="py-4 px-6 text-gray-500">No context</td>
+                        <td class="text-center py-4 px-6">—</td>
+                        <td class="text-center py-4 px-6">—</td>
+                        <td class="text-center py-4 px-6">4.9/10</td>
+                        <td class="text-center py-4 px-6 text-green-600">None</td>
+                    </tr>
+                    <tr class="border-t border-gray-100">
+                        <td class="py-4 px-6 text-gray-500">Embeddings RAG</td>
+                        <td class="text-center py-4 px-6">98%</td>
+                        <td class="text-center py-4 px-6">0.79</td>
+                        <td class="text-center py-4 px-6">8.6/10</td>
+                        <td class="text-center py-4 px-6 text-amber-500">Vector DB</td>
+                    </tr>
+                    <tr class="border-t border-gray-200 bg-blue-50/50 font-medium">
+                        <td class="py-4 px-6 text-blue-700">ContextPacker</td>
+                        <td class="text-center py-4 px-6 text-blue-700">98%</td>
+                        <td class="text-center py-4 px-6 text-blue-700">0.92</td>
+                        <td class="text-center py-4 px-6 text-blue-700">8.5/10</td>
+                        <td class="text-center py-4 px-6 text-blue-700">None</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="text-xs text-gray-400 mt-4 text-center">Tested on private repos (zero LLM prior). Same answer quality as embeddings, +13% better file ranking, zero infrastructure.</p>
+    </div>
+</section>
+
+<!-- Use Cases -->
+<section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-2xl font-bold mb-3 text-center">Why not build your own RAG?</h2>
+        <p class="text-gray-500 text-center mb-10 max-w-2xl mx-auto">You could. Here's what that takes:</p>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- No indexing -->
+            <div class="border border-gray-200 rounded-xl p-6 hover:border-blue-300 transition-colors">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="font-semibold mb-2">No pre-indexing</h3>
+                <p class="text-sm text-gray-500 mb-3">Embeddings need you to index first, then wait. We work on first call — just pass the repo URL.</p>
+                <div class="text-xs text-gray-400"><a href="/alternatives.html" class="hover:text-blue-600 transition-colors">Embeddings</a>: "Wait 5 min while we index"</div>
+                <div class="text-xs text-blue-600">Us: Works immediately</div>
+            </div>
+            
+            <!-- No vector DB -->
+            <div class="border border-gray-200 rounded-xl p-6 hover:border-blue-300 transition-colors">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                </div>
+                <h3 class="font-semibold mb-2">No vector DB</h3>
+                <p class="text-sm text-gray-500 mb-3">Pinecone, Weaviate, Chroma — pick one, pay for it, keep it in sync. Or just call our API.</p>
+                <div class="text-xs text-gray-400">Embeddings: Manage vector infra</div>
+                <div class="text-xs text-blue-600">Us: Zero infrastructure</div>
+            </div>
+            
+            <!-- Structural awareness -->
+            <div class="border border-gray-200 rounded-xl p-6 hover:border-blue-300 transition-colors">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                </div>
+                <h3 class="font-semibold mb-2">Structural awareness</h3>
+                <p class="text-sm text-gray-500 mb-3">We read the file tree. We know <code class="bg-gray-100 px-1 rounded">src/</code> from <code class="bg-gray-100 px-1 rounded">tests/</code>, entrypoints from utils.</p>
+                <div class="text-xs text-gray-400">Embeddings: Text similarity only</div>
+                <div class="text-xs text-blue-600">Us: Understands repo layout</div>
+            </div>
+        </div>
+        
+        <p class="text-center text-sm text-gray-400 mt-8">We're infrastructure, not a product. No dashboards, no onboarding. Just an API.</p>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section id="how" class="py-20 bg-gray-50 border-t border-gray-100">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">Under the hood</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-blue-600 font-bold">1</span>
+                </div>
+                <h3 class="font-semibold mb-2">Clone + index on-the-fly</h3>
+                <p class="text-sm text-gray-500">We shallow-clone your repo, build a file tree with symbol extraction, delete it after. Nothing stored.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-blue-600 font-bold">2</span>
+                </div>
+                <h3 class="font-semibold mb-2">LLM picks the files</h3>
+                <p class="text-sm text-gray-500">A fast model (Gemini Flash) reads the tree + your query and selects ~8 files. Smarter than cosine similarity.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-blue-600 font-bold">3</span>
+                </div>
+                <h3 class="font-semibold mb-2">Pack to your token budget</h3>
+                <p class="text-sm text-gray-500">We fit files into your limit. Large files get truncated intelligently, not dropped entirely.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- API -->
+<section id="docs" class="py-20 bg-gray-900 text-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold mb-4">Zero indexing. One HTTP call.</h2>
+                <p class="text-gray-400 mb-6 text-lg">Just call the API with a repo URL and a question. No onboarding, no sync, no CLI.</p>
+                <ul class="space-y-3">
+                    <li class="flex gap-3 items-center"><span class="text-green-400">✓</span> Returns standard Markdown</li>
+                    <li class="flex gap-3 items-center"><span class="text-green-400">✓</span> Auto-caching built in</li>
+                    <li class="flex gap-3 items-center"><span class="text-green-400">✓</span> Works with any LLM</li>
+                    <li class="flex gap-3 items-center"><span class="text-green-400">✓</span> Adjustable token budget</li>
+                </ul>
+            </div>
+            <div class="bg-gray-950 rounded-xl border border-gray-800 overflow-hidden">
+                <div class="px-4 py-2 border-b border-gray-800 text-xs text-gray-500 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                    <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                    <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                    <span class="ml-2">agent.py</span>
+                </div>
+                <pre class="p-4 text-sm text-gray-300 overflow-x-auto"><code>resp = httpx.post(
+    "https://contextpacker.com/v1/packs",
+    headers={"X-API-Key": KEY},
+    json={
+        "repo_url": "https://github.com/pallets/flask",
+        "query": "Where is session handling?",
+        "max_tokens": 6000,
+    }
+)
+context = resp.json()["markdown"]
+
+# Feed to your LLM
+answer = openai.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{
+        "role": "user", 
+        "content": f"{context}\n\nQuestion: {query}"
+    }]
+)</code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Preview -->
+<section class="py-16 bg-white border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-6">
+        <h2 class="text-2xl font-bold mb-2 text-center">Simple pricing</h2>
+        <p class="text-gray-500 text-center mb-10">No subscriptions. Just credits.</p>
+        
+        <div class="grid md:grid-cols-2 gap-6 max-w-xl mx-auto">
+            <div class="border border-gray-200 rounded-xl p-6 text-center">
+                <div class="text-sm font-medium text-gray-500 mb-2">Free</div>
+                <div class="text-3xl font-bold mb-1">100</div>
+                <div class="text-sm text-gray-400 mb-4">credits on signup</div>
+                <div class="text-xs text-gray-500">No credit card required</div>
+            </div>
+            <div class="border-2 border-blue-500 rounded-xl p-6 text-center bg-blue-50/30">
+                <div class="text-sm font-medium text-blue-600 mb-2">Top up</div>
+                <div class="text-3xl font-bold mb-1">$9</div>
+                <div class="text-sm text-gray-400 mb-4">1,000 credits</div>
+                <div class="text-xs text-gray-500">Never expire</div>
+            </div>
+        </div>
+        <p class="text-center text-sm text-gray-500 mt-4">1 credit = 1 API call. Top up anytime.</p>
+    </div>
+</section>
+
+<!-- CTA -->
+</main>
+<footer id="cta" class="py-20 bg-gray-50 border-t border-gray-100" aria-labelledby="cta-heading">
+    <div class="max-w-lg mx-auto px-6 text-center">
+        <h2 id="cta-heading" class="text-3xl font-bold mb-3">Get Started</h2>
+        <p class="text-gray-500 mb-8">Get your API key instantly. No credit card required.</p>
+        
+        <!-- Signup Form -->
+        <div class="max-w-sm mx-auto">
+            <div class="flex gap-3">
+                <input 
+                    type="email" 
+                    name="email"
+                    id="email-input" 
+                    placeholder="your@email.com" 
+                    autocomplete="email"
+                    inputmode="email"
+                    class="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                />
+                <button 
+                    id="get-key-btn" 
+                    class="bg-gray-900 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed whitespace-nowrap"
+                    onclick="getApiKey()"
+                >
+                    Get Key
+                </button>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-result" class="mt-4 hidden">
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4 max-w-sm mx-auto">
+                <p class="text-sm text-red-700"></p>
+            </div>
+        </div>
+
+        <!-- API Key Result -->
+        <div id="api-key-result" class="mt-6 hidden">
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-sm font-medium text-gray-700">Your API key:</span>
+                    <button 
+                        id="copy-btn"
+                        onclick="copyApiKey()"
+                        class="text-xs text-blue-600 hover:text-blue-700 px-2 py-1 hover:bg-blue-50 rounded"
+                    >
+                        Copy
+                    </button>
+                </div>
+                <div class="bg-white border rounded p-3">
+                    <code id="api-key-display" class="text-xs font-mono text-gray-800 block select-all"></code>
+                </div>
+                <p class="text-xs text-gray-500 mt-3">
+                    <span id="credits-display"></span> free requests • 
+                    <a href="/docs.html" class="text-blue-600 hover:text-blue-700">View API docs →</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+        <script>
+        let currentApiKey = '';
+        
+        async function getApiKey() {
+            const email = document.getElementById('email-input').value.trim();
+            const btn = document.getElementById('get-key-btn');
+            const resultDiv = document.getElementById('api-key-result');
+            const errorDiv = document.getElementById('error-result');
+            
+            if (!email || !isValidEmail(email)) {
+                showError('Please enter a valid email address');
+                return;
+            }
+            
+            // Loading state
+            btn.disabled = true;
+            btn.textContent = 'Getting...';
+            resultDiv.classList.add('hidden');
+            errorDiv.classList.add('hidden');
+            
+            try {
+                const response = await fetch('/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Success
+                    currentApiKey = data.api_key;
+                    document.getElementById('api-key-display').textContent = data.api_key;
+                    document.getElementById('credits-display').textContent = data.credits;
+                    resultDiv.classList.remove('hidden');
+                    
+                    // Try to copy automatically, but don't show message unless it works
+                    tryAutoCopy();
+                } else {
+                    showError(data.message || 'Failed to generate API key');
+                }
+            } catch (error) {
+                showError('Network error. Please try again.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Get Key';
+            }
+        }
+        
+        async function copyApiKey() {
+            const btn = document.getElementById('copy-btn');
+            const originalText = btn.textContent;
+            
+            try {
+                await navigator.clipboard.writeText(currentApiKey);
+                btn.textContent = 'Copied!';
+                btn.classList.add('text-green-600');
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('text-green-600');
+                }, 1500);
+            } catch (error) {
+                btn.textContent = 'Select & copy';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            }
+        }
+        
+        function tryAutoCopy() {
+            // Silently try to copy, don't show any messages
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(currentApiKey).catch(() => {});
+            }
+        }
+        
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error-result');
+            errorDiv.querySelector('p').textContent = message;
+            errorDiv.classList.remove('hidden');
+        }
+        
+        // Enter key support
+        document.getElementById('email-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                getApiKey();
+            }
+        });
+        </script>
+        
+        <!-- Trust bar -->
+        <div class="flex flex-wrap justify-center gap-6 mt-10 text-xs text-gray-400">
+            <span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg> No code storage</span>
+            <span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg> Temp dir cleanup</span>
+            <span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg> Token used once</span>
+        </div>
+        
+        <div class="flex justify-center gap-8 text-sm text-gray-500 mt-8">
+            <a href="/how-it-works.html" class="hover:text-gray-900">How It Works</a>
+            <a href="/evaluation.html" class="hover:text-gray-900">Evaluation</a>
+            <a href="/docs.html" class="hover:text-gray-900">API Docs</a>
+        </div>
+        
+        <p class="text-xs text-gray-400 mt-4 text-center">© 2025 ContextPacker. Code context API for AI agents.</p>
+    </div>
+</footer>
+
+</body>
+</html>

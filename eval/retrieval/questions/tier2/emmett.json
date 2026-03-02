@@ -1,0 +1,104 @@
+{
+  "repo_url": "https://github.com/emmett-framework/emmett",
+  "description": "Emmett - Full-stack Python web framework",
+  "language": "python",
+  "tier": "obscure",
+  "questions": [
+    {
+      "id": "emmett_easy_01",
+      "query": "Where is the main App class?",
+      "ground_truth_files": ["emmett/app.py"],
+      "alternatives": ["emmett/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "emmett_easy_02",
+      "query": "How does routing work?",
+      "ground_truth_files": ["emmett/routing/router.py", "emmett/routing/routes.py"],
+      "alternatives": ["emmett/routing/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "emmett_easy_03",
+      "query": "Where is the Request class defined?",
+      "ground_truth_files": ["emmett/wrappers/request.py"],
+      "alternatives": ["emmett/wrappers/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "emmett_medium_01",
+      "query": "How does session handling work?",
+      "ground_truth_files": ["emmett/sessions.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "feature"
+    },
+    {
+      "id": "emmett_medium_02",
+      "query": "Where is the ORM and model system?",
+      "ground_truth_files": ["emmett/orm/models.py", "emmett/orm/__init__.py"],
+      "alternatives": ["emmett/orm/base.py"],
+      "difficulty": "medium",
+      "category": "feature"
+    },
+    {
+      "id": "emmett_medium_03",
+      "query": "How does caching work in Emmett?",
+      "ground_truth_files": ["emmett/cache.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "feature"
+    },
+    {
+      "id": "emmett_medium_04",
+      "query": "Where is form handling and validation?",
+      "ground_truth_files": ["emmett/forms.py", "emmett/validators/__init__.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "feature"
+    },
+    {
+      "id": "emmett_hard_01",
+      "query": "How does the template engine work?",
+      "ground_truth_files": ["emmett/templating/templater.py", "emmett/templating/lexers.py"],
+      "alternatives": ["emmett/templating/__init__.py"],
+      "difficulty": "hard",
+      "category": "feature"
+    },
+    {
+      "id": "emmett_hard_02",
+      "query": "How does the pipeline/middleware system work?",
+      "ground_truth_files": ["emmett/pipeline.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "architecture"
+    },
+    {
+      "id": "emmett_hard_03",
+      "query": "How are database migrations handled?",
+      "ground_truth_files": ["emmett/orm/migrations/__init__.py", "emmett/orm/migrations/engine.py"],
+      "alternatives": ["emmett/orm/migrations/commands.py"],
+      "difficulty": "hard",
+      "category": "feature"
+    },
+    {
+      "id": "emmett_expert_01",
+      "query": "How does the ASGI handler work?",
+      "ground_truth_files": ["emmett/asgi/handlers.py"],
+      "alternatives": ["emmett/asgi/__init__.py"],
+      "difficulty": "expert",
+      "category": "architecture"
+    },
+    {
+      "id": "emmett_expert_02",
+      "query": "Where is the authentication system?",
+      "ground_truth_files": ["emmett/tools/auth/__init__.py", "emmett/tools/auth/ext.py"],
+      "alternatives": ["emmett/security.py"],
+      "difficulty": "expert",
+      "category": "security"
+    }
+  ]
+}

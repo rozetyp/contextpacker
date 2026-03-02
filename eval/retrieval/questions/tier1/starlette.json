@@ -1,0 +1,128 @@
+{
+  "repo_url": "https://github.com/encode/starlette",
+  "description": "Starlette - Lightweight ASGI framework",
+  "language": "python",
+  "tier": "popular",
+  "questions": [
+    {
+      "id": "starlette_easy_01",
+      "query": "Where is the Starlette application class?",
+      "ground_truth_files": ["starlette/applications.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "starlette_easy_02",
+      "query": "Where is the Request class?",
+      "ground_truth_files": ["starlette/requests.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "starlette_easy_03",
+      "query": "Where are response classes defined?",
+      "ground_truth_files": ["starlette/responses.py"],
+      "alternatives": [],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "starlette_medium_01",
+      "query": "How does Starlette's routing work?",
+      "ground_truth_files": ["starlette/routing.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "starlette_medium_02",
+      "query": "How does Starlette implement middleware?",
+      "ground_truth_files": ["starlette/middleware/__init__.py", "starlette/middleware/base.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "starlette_medium_03",
+      "query": "How does Starlette handle WebSocket connections?",
+      "ground_truth_files": ["starlette/websockets.py"],
+      "alternatives": ["starlette/routing.py"],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "starlette_medium_04",
+      "query": "How does Starlette handle static files?",
+      "ground_truth_files": ["starlette/staticfiles.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "starlette_medium_05",
+      "query": "How does Starlette integrate with Jinja2 templates?",
+      "ground_truth_files": ["starlette/templating.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "starlette_hard_01",
+      "query": "What's the ASGI request lifecycle in Starlette?",
+      "ground_truth_files": ["starlette/applications.py", "starlette/routing.py"],
+      "alternatives": ["starlette/middleware/base.py"],
+      "difficulty": "hard",
+      "category": "crosscutting"
+    },
+    {
+      "id": "starlette_hard_02",
+      "query": "How does Starlette handle authentication?",
+      "ground_truth_files": ["starlette/authentication.py"],
+      "alternatives": ["starlette/middleware/authentication.py"],
+      "difficulty": "hard",
+      "category": "implementation"
+    },
+    {
+      "id": "starlette_hard_03",
+      "query": "How does Starlette handle server-sent events?",
+      "ground_truth_files": ["starlette/responses.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "implementation"
+    },
+    {
+      "id": "starlette_hard_04",
+      "query": "Where would I add request logging for all routes?",
+      "ground_truth_files": ["starlette/middleware/base.py"],
+      "alternatives": ["starlette/applications.py"],
+      "difficulty": "hard",
+      "category": "vague"
+    },
+    {
+      "id": "starlette_expert_01",
+      "query": "Why might a background task not execute?",
+      "ground_truth_files": ["starlette/background.py", "starlette/responses.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging"
+    },
+    {
+      "id": "starlette_expert_02",
+      "query": "How does Starlette handle connection state between middleware?",
+      "ground_truth_files": ["starlette/requests.py", "starlette/middleware/base.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "architecture"
+    },
+    {
+      "id": "starlette_expert_03",
+      "query": "What determines if a route matches with trailing slashes?",
+      "ground_truth_files": ["starlette/routing.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "implementation"
+    }
+  ]
+}

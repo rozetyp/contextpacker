@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How ContextPacker Works | Code Context Retrieval for AI Agents</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn how ContextPacker retrieves relevant code context for LLMs without embeddings or vector databases. Built for AI coding agents, IDE extensions, and developer tools.">
+    <meta name="keywords" content="code context retrieval, RAG for code, LLM context window, AI coding assistant, code search API, semantic code search, developer tools API">
+    <meta name="author" content="ContextPacker">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://contextpacker.com/how-it-works.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://contextpacker.com/how-it-works.html">
+    <meta property="og:title" content="How ContextPacker Works | Code Context Retrieval for AI Agents">
+    <meta property="og:description" content="Learn how ContextPacker retrieves relevant code context for LLMs without embeddings or vector databases.">
+    <meta property="og:image" content="https://contextpacker.com/og-image.png">
+    <meta property="og:site_name" content="ContextPacker">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How ContextPacker Works | Code Context Retrieval">
+    <meta name="twitter:description" content="Code context retrieval for AI agents without embeddings or vector databases.">
+    
+    <!-- Structured Data - Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "How ContextPacker Works: Code Context Retrieval for AI Agents",
+        "description": "Technical overview of how ContextPacker retrieves relevant code files for LLMs without embeddings or vector databases.",
+        "author": {
+            "@type": "Organization",
+            "name": "ContextPacker"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "ContextPacker"
+        },
+        "datePublished": "2025-12-01",
+        "dateModified": "2025-12-03"
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+    <style>
+        html, body { margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .mono { font-family: ui-monospace, monospace; }
+        .prose h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
+        .prose h3 { margin-top: 2rem; margin-bottom: 0.75rem; }
+        .prose p { margin-bottom: 1.25rem; line-height: 1.75; }
+        .prose ul { margin-bottom: 1.25rem; }
+        .prose li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+<!-- Nav -->
+<header>
+<nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur border-b border-gray-100" aria-label="Main navigation">
+    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="/" class="font-semibold text-lg" aria-label="ContextPacker Home">ContextPacker</a>
+        <div class="hidden md:flex gap-8 text-sm text-gray-500">
+            <a href="/how-it-works.html" class="text-gray-900 font-medium">How It Works</a>
+            <a href="/evaluation.html" class="hover:text-gray-900">Evaluation</a>
+            <a href="/docs.html" class="hover:text-gray-900">API Docs</a>
+        </div>
+        <a href="/#cta" class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800">Get Access</a>
+    </div>
+</nav>
+</header>
+
+<main>
+<!-- Hero -->
+<section class="pt-24 pb-12 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-3xl mx-auto px-6">
+        <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-gray-900">Home</a>
+            <span class="mx-2">→</span>
+            <span class="text-gray-900">How It Works</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            How ContextPacker Works
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed">
+            A different approach to code context retrieval. No embeddings, no vector database, no pre-indexing. Just intelligent file selection that works on any repository instantly.
+        </p>
+    </div>
+</section>
+
+<!-- Content -->
+<article class="py-12">
+    <div class="max-w-3xl mx-auto px-6 prose">
+        
+        <h2 class="text-2xl font-bold text-gray-900">The Goal: Bootloader for Agents</h2>
+        
+        <p class="text-gray-600">
+            When an autonomous agent (like a PR bot or coding assistant) encounters a new repository, it needs a mental map and relevant code snippets in seconds, without the overhead of a permanent RAG pipeline.
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900">1. The Core Pipeline</h2>
+        
+        <p class="text-gray-600">
+            Instead of treating code as generic text chunks for embeddings, ContextPacker follows a "breadth-first" discovery process similar to how a senior developer explores a codebase.
+        </p>
+        
+        <h3 class="text-xl font-semibold text-gray-900">Phase 1: The Semantic Skeleton</h3>
+        <p class="text-gray-600">
+            We build a lightweight, hierarchical representation of the repository.
+        </p>
+        <ul class="text-gray-600 list-disc pl-6">
+            <li><strong>Symbol Extraction:</strong> We use AST parsing to extract top-level functions, classes, and types.</li>
+            <li><strong>Hierarchical Compression:</strong> To fit large repos into a context window, we summarize low-signal folders (e.g., <code>... +142 more files</code>) while expanding high-signal branches.</li>
+            <li><strong>Query-Aware Expansion:</strong> We tokenize the user's query and dynamically "zoom in" on folders that match the keywords.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900">Phase 2: Intelligent Selection</h3>
+        <p class="text-gray-600">
+            A fast reasoning model reads the compressed tree and assigns priority:
+        </p>
+        <ul class="text-gray-600 list-disc pl-6">
+            <li><strong>Critical (55% budget):</strong> Core logic.</li>
+            <li><strong>Important (30% budget):</strong> Direct dependencies.</li>
+            <li><strong>Supplementary (10%):</strong> Auxiliary logic.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900">Phase 3: Adaptive Packing</h3>
+        <p class="text-gray-600">
+            We read the selected files and fit them into your token budget using <strong>O(1) Token Slicing</strong>. Large files are truncated gracefully, ensuring the LLM sees imports and definitions even if the full implementation is huge.
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900">2. The Agent Lifecycle</h2>
+        
+        <p class="text-gray-600">
+            ContextPacker is designed for iterative agent loops:
+        </p>
+        
+        <ol class="text-gray-600 list-decimal pl-6">
+            <li><strong>Discovery:</strong> Agent calls <code>/v1/skeleton</code> to see the repo "Map."</li>
+            <li><strong>Planning:</strong> Agent identifies candidate directories.</li>
+            <li><strong>Retrieval:</strong> Agent calls <code>/v1/packs</code> to get the "Data."</li>
+            <li><strong>Action:</strong> Agent applies changes or answers the user.</li>
+        </ol>
+        
+        <h2 class="text-2xl font-bold text-gray-900">3. Distribution: Zero Friction CLI</h2>
+        
+        <div class="bg-gray-900 rounded-xl p-4 my-6 overflow-x-auto">
+            <pre class="text-sm text-gray-300"><code>npx contextpacker https://github.com/fastapi/fastapi "routing"</code></pre>
+        </div>
+        
+        <p class="text-gray-600">
+            We built the CLI to minimize "Time to Wow." It automatically generates an anonymous device ID and grants <strong>100 free credits instantly</strong>. No signup, no config, no git clone.
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900">Benchmarks</h2>
+        
+        <div class="overflow-x-auto my-6">
+            <table class="w-full text-sm border border-gray-200 rounded-xl">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="text-left py-3 px-4 font-medium text-gray-600">Metric</th>
+                        <th class="text-center py-3 px-4 font-medium text-gray-600">ContextPacker</th>
+                        <th class="text-center py-3 px-4 font-medium text-gray-600">Embeddings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-t">
+                        <td class="py-3 px-4 text-gray-600">Latency (Warm)</td>
+                        <td class="text-center py-3 px-4 text-green-600">~1.5s</td>
+                        <td class="text-center py-3 px-4 text-green-600">~0.5s</td>
+                    </tr>
+                    <tr class="border-t">
+                        <td class="py-3 px-4 text-gray-600">Expert Recall</td>
+                        <td class="text-center py-3 px-4 text-blue-600">75%</td>
+                        <td class="text-center py-3 px-4 text-gray-500">60-70%</td>
+                    </tr>
+                    <tr class="border-t">
+                        <td class="py-3 px-4 text-gray-600">Setup Time</td>
+                        <td class="text-center py-3 px-4 text-green-600">0s (URL)</td>
+                        <td class="text-center py-3 px-4 text-amber-600">~5 mins</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="flex gap-4 my-8">
+            <a href="/#cta" class="inline-block bg-gray-900 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-gray-800">
+                Get API Key →
+            </a>
+            <a href="/docs.html" class="inline-block border border-gray-300 text-gray-700 px-6 py-3 rounded-lg text-sm font-medium hover:border-gray-400">
+                View API Docs
+            </a>
+        </div>
+        
+    </div>
+</article>
+</main>
+
+<!-- Footer -->
+<footer class="py-12 bg-gray-50 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+        <div class="flex justify-center gap-8 text-sm text-gray-500 mt-8">
+            <a href="/how-it-works.html" class="text-gray-900 font-medium">How It Works</a>
+            <a href="/evaluation.html" class="hover:text-gray-900">Evaluation</a>
+            <a href="/docs.html" class="hover:text-gray-900">API Docs</a>
+        </div>
+        <p class="text-xs text-gray-400 mt-4">© 2025 ContextPacker. Code context API for AI agents.</p>
+    </div>
+</footer>
+
+</body>
+</html>

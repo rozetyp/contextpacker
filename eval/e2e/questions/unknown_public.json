@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "description": "E2E questions for unknown public repos (<1K stars) - minimal LLM prior, reproducible",
+  "questions": [
+    {
+      "id": "unknown_001",
+      "repo_url": "https://github.com/klen/muffin",
+      "query": "How does Muffin's plugin system work?",
+      "key_facts": [
+        "BasePlugin in plugins.py is the abstract base class",
+        "Plugins have optional startup, shutdown, middleware methods",
+        "setup() method registers plugin with the Application",
+        "Plugin configuration uses modconfig.Config with defaults"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "unknown_002",
+      "repo_url": "https://github.com/klen/muffin",
+      "query": "How does Muffin application initialization work?",
+      "key_facts": [
+        "Application class in app.py extends asgi_tools.App",
+        "Configuration loaded from modules via modconfig.Config",
+        "Environment variables prefixed with app name are loaded",
+        "Manager handles CLI commands"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "unknown_003",
+      "repo_url": "https://github.com/klen/muffin",
+      "query": "How does Muffin handle background tasks?",
+      "key_facts": [
+        "BACKGROUND_TASKS is a ContextVar in app.py",
+        "Tasks are stored as a set of Awaitable objects",
+        "aio_wait from asgi_tools handles async waiting",
+        "Background tasks context is per-request"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "unknown_004",
+      "repo_url": "https://github.com/AliRn76/panther",
+      "query": "How does Panther's URL routing work?",
+      "key_facts": [
+        "flatten_urls() in routings.py converts nested dict to flat",
+        "finalize_urls() converts flat dict back to nested for matching",
+        "_is_url_endpoint_valid() validates URL patterns",
+        "Path variables use angle bracket syntax like <id>"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "unknown_005",
+      "repo_url": "https://github.com/AliRn76/panther",
+      "query": "How does Panther's middleware system work?",
+      "key_facts": [
+        "HTTPMiddleware and WebsocketMiddleware are base classes",
+        "Middleware receives dispatch callable in __init__",
+        "__call__ receives Request and returns Response",
+        "CORSMiddleware and MonitoringMiddleware are built-in"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "unknown_006",
+      "repo_url": "https://github.com/0b01001001/spectree",
+      "query": "How does SpecTree generate OpenAPI documentation?",
+      "key_facts": [
+        "SpecTree class in spec.py is the main interface",
+        "Supports flask, quart, falcon, starlette backends",
+        "Uses Pydantic models for request/response schemas",
+        "register() method connects to the backend application"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "unknown_007",
+      "repo_url": "https://github.com/0b01001001/spectree",
+      "query": "How does SpecTree handle validation errors?",
+      "key_facts": [
+        "validation_error_status defaults to 422",
+        "ValidationError model from spectree.models is default",
+        "before callback runs after request validation",
+        "after callback runs after response validation"
+      ],
+      "difficulty": "medium"
+    }
+  ]
+}

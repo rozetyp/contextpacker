@@ -1,0 +1,65 @@
+{
+  "repo_url": "https://github.com/Rapptz/discord.py",
+  "description": "discord.py - Python wrapper for Discord API",
+  "language": "python",
+  "tier": "obscure",
+  "questions": [
+    {
+      "id": "discordpy_easy_01",
+      "query": "Where is the Client class?",
+      "ground_truth_files": ["discord/client.py"],
+      "alternatives": ["discord/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "discordpy_easy_02",
+      "query": "Where are commands defined?",
+      "ground_truth_files": ["discord/ext/commands/core.py"],
+      "alternatives": ["discord/ext/commands/__init__.py"],
+      "difficulty": "easy",
+      "category": "entry"
+    },
+    {
+      "id": "discordpy_medium_01",
+      "query": "How does the event system work?",
+      "ground_truth_files": ["discord/client.py", "discord/gateway.py"],
+      "alternatives": [],
+      "difficulty": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "discordpy_medium_02",
+      "query": "How does the websocket connection work?",
+      "ground_truth_files": ["discord/gateway.py"],
+      "alternatives": ["discord/client.py"],
+      "difficulty": "medium",
+      "category": "implementation"
+    },
+    {
+      "id": "discordpy_hard_01",
+      "query": "How does discord.py handle rate limiting?",
+      "ground_truth_files": ["discord/http.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "implementation"
+    },
+    {
+      "id": "discordpy_hard_02",
+      "query": "What happens when a message is received?",
+      "ground_truth_files": ["discord/gateway.py", "discord/state.py", "discord/client.py"],
+      "alternatives": [],
+      "difficulty": "hard",
+      "category": "crosscutting"
+    },
+    {
+      "id": "discordpy_expert_01",
+      "query": "Why might events not fire for certain messages?",
+      "ground_truth_files": ["discord/state.py", "discord/gateway.py"],
+      "alternatives": [],
+      "difficulty": "expert",
+      "category": "debugging",
+      "notes": "Intents, caching, gateway events"
+    }
+  ]
+}

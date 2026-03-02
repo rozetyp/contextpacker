@@ -1,0 +1,11 @@
+# robots.txt for contextpacker.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://contextpacker.com/sitemap.xml
+
+# Disallow API endpoints from indexing
+Disallow: /v1/
+Disallow: /api/
