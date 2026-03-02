@@ -5,7 +5,7 @@ Contributions, bug reports, and feature requests are welcome!
 ## Getting started
 
 ```bash
-git clone https://github.com/contextpacker/contextpacker
+git clone https://github.com/rozetyp/contextpacker
 cd contextpacker
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt

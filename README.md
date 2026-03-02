@@ -31,7 +31,7 @@ Returns packed Markdown ready for your LLM prompt
 The fastest way to get started: **[contextpacker.com](https://contextpacker.com)**
 
 - 100 free requests, no card required
-- Use our [MCP server](https://github.com/contextpacker/contextpacker-mcp) to connect any MCP-compatible AI editor (Cursor, Claude Desktop, Windsurf)
+- Use our [MCP server](https://github.com/rozetyp/contextpacker-mcp) to connect any MCP-compatible AI editor (Cursor, Claude Desktop, Windsurf)
 
 ---
 
@@ -46,7 +46,7 @@ The fastest way to get started: **[contextpacker.com](https://contextpacker.com)
 ### Setup
 
 ```bash
-git clone https://github.com/contextpacker/contextpacker
+git clone https://github.com/rozetyp/contextpacker
 cd contextpacker
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
